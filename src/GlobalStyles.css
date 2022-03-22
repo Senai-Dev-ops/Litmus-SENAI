@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,330;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,330;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600&display=swap");
 *,
 *::after,
 *::before {
@@ -11,13 +11,14 @@
 
 /* Variáveis */
 :root {
-  --bg: #ffffff;
+  --bg-main: #ffffff;
   --primary: #262424;
   --red: #d21e1e;
   --gray: #7b7b7b56;
+  --black: #000;
 }
 
 body {
-  background-color: var(--bg);
+  background-color: var(--bg-main);
   color: var(--primary);
 }
