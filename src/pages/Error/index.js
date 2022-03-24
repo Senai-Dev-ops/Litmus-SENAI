@@ -2,7 +2,9 @@ import React from "react";
 import ErrorImage from "../../assets/error.png";
 import "./style.css";
 
-const Error = ({ error, typeError, text }) => {
+const textDefault = "A página que você está procurando não existe.";
+
+const Error = ({ error = "404", typeError, text = textDefault }) => {
 	return (
 		<main className="container-main">
 			<header></header>
