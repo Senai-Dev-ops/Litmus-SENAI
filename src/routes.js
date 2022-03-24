@@ -5,36 +5,62 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
 
-export default function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route
-          path="/*"
-          element={
-            <Error
-              typeError="code"
-              error="404"
-              text="A página que você está procurando não existe."
-            />
-          }
-        />
+const userAuth = () => {
+	return false;
+};
 
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route
-          path="/dashboard/*"
-          element={
-            <Error
-              error="Acesso restrito."
-              text="Você não tem permissão para acessar esta página. "
-            />
-          }
-        />
+const PrivateRouteAdmin = ({ children }) => {
+	const auth = userAuth();
+	const userComum = true;
 
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/*" element={<Error error="404" />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+	return auth ? (
+		children
+	) : userComum ? (
+		<Error
+			error="Acesso restrito"
+			text="Você não tem permissão para acessar esta página."
+		/>
+	) : (
+		<Error error="Acesso restrito" text="Faça login para acessar a página" />
+	);
+};
+
+const PrivateRouteUser = ({ children }) => {
+	const auth = userAuth();
+	return auth ? (
+		children
+	) : (
+		<Error error="Acesso restrito" text="Faça login para acessar a página" />
+	);
+};
+
+const Router = () => {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/*" element={<Error typeError="code" />} />
+				<Route path="/" element={<Login />} />
+
+				<Route
+					path="/dashboard"
+					element={
+						<PrivateRouteUser>
+							<Dashboard />
+						</PrivateRouteUser>
+					}
+				/>
+
+				<Route
+					path="/admin"
+					element={
+						<PrivateRouteAdmin>
+							<Admin />
+						</PrivateRouteAdmin>
+					}
+				/>
+			</Routes>
+		</BrowserRouter>
+	);
+};
+
+export default Router;
