@@ -168,8 +168,8 @@ export default function CustomTable({rowsNumber}) {
                             <StyledTableCell align="center">
                                 {row.role}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                <OptionsDialog />
+                            <StyledTableCell align="left">
+                                <OptionsDialog user={row.name}/>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
