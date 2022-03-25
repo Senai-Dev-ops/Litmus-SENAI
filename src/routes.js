@@ -6,7 +6,7 @@ import Admin from "./pages/Admin";
 import Error from "./pages/Error";
 
 const userAuth = () => {
-	return false;
+	return true;
 };
 
 const PrivateRouteAdmin = ({ children }) => {

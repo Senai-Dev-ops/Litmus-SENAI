@@ -1,0 +1,53 @@
+.container-space{
+    background-color: #fff;
+    border-bottom: 1px solid #c8cbd9;
+    box-shadow: 5px 1px 10px #c8cbd9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    color: #000;
+    justify-content: space-between;
+    width: 90%;
+    align-items: center;
+
+  
+}
+
+.logo{
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+
+}
+
+.logo img{
+    height: auto;
+    width: 14.5em;
+}
+
+.logo p{
+    color: #fff;
+    width: 20em;
+    font-size: 0.2em;
+}
+
+
+
+.page{
+    color: #636363;
+    font-family: "Nunito";
+    font-weight:bold;
+    font-size: 3em;
+    
+}
+.user{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
