@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorImage from "../../assets/error.png";
+import ErrorImage from "../../assets/images/error.png";
 import "./style.css";
 
 const textDefault = "A página que você está procurando não existe.";
