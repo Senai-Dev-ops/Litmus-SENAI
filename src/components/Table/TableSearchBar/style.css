@@ -17,16 +17,9 @@
     margin-left: 5em;
     width: 60%;
     height: 2.5em;
-    padding: 5px;
+    padding-left: 12px;
     border: 0.4px solid #7a7a7a;
-    border-radius: 10px;
-}
-
-#addUserButton {
-    background-color: var(--red);
-    color:  white;
     border-radius: 20px;
-    width: 130px;
 }
 
 @media screen and (max-width: 1640px){

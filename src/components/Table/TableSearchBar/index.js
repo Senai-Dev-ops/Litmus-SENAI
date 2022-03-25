@@ -1,4 +1,4 @@
-import Button from "@mui/material/Button";
+import RegisterDialog from "../RegisterDialog";
 import "./style.css"
 
 export default function TableSearchBar() {
@@ -9,9 +9,10 @@ export default function TableSearchBar() {
                 <p style={{ fontSize: "20px" }}><strong>Usuário</strong></p>
 
                 <input type="text" className="searchInput"></input>
+                
             </div>
 
-            <Button size="medium" id="addUserButton">Add User</Button>
+            <RegisterDialog />
         </div>
     );
 }
