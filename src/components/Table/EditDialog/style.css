@@ -35,6 +35,7 @@ input {
     font-size: 16px;
 }
 
+
 select {
     width: 350px;
     height: 3em;
@@ -50,15 +51,7 @@ select {
     margin-left: 1.15em;
 }
 
-#addUserButton {
-    background-color: var(--red);
-    color:  white;
-    font-weight: 600;
-    border-radius: 20px;
-    width: 130px;
-}
-
-#confirmRegisterButton {
+#confirmEditButton {
     background-color: var(--red);
     color:  white;
     border-radius: 8px;

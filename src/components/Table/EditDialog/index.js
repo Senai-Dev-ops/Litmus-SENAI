@@ -7,7 +7,6 @@ import {
     DialogTitle,
   } from "@mui/material";
   import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-  import { useState } from "react";
   import "./style.css";
   
   export default function EditDialog({open, onClose}) {
@@ -72,7 +71,7 @@ import {
               marginBottom: "1em",
             }}
           >
-            <Button id="confirmRegisterButton" onClick={handleClose}>
+            <Button id="confirmEditButton" onClick={handleClose}>
               Editar
             </Button>
           </DialogActions>

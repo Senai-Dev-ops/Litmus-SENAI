@@ -136,7 +136,7 @@ export default function CustomTable({rowsNumber}) {
     return (
         <TableContainer component={Paper}>
             <TableSearchBar />
-            <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+            <Table sx={{ minWidth: 580 }} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>NOME</StyledTableCell>
