@@ -10,7 +10,7 @@ main.login section.bg-image {
   width: 60%;
   height: 100%;
 
-  background-image: url("../../assets/images/bgSenaiMachines.jpg");
+  background-image: url("../../assets/images/blurBackgroundImage.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,6 +22,8 @@ main.login section.container-form {
   height: 100%;
   padding: 5px;
 
+  background-color: var(--bg-main);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,25 +31,77 @@ main.login section.container-form {
 }
 
 main.login .container-form .content {
-  height: 100%;
-
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+
+  width: 100%;
 }
 
 main.login .container-form .content img.logo-senai {
-  width: 100%;
+  width: 50%;
 }
 
 main.login .container-form .content form {
-  width: 100%;
-  height: 20vh;
-  border: 1px solid #000;
+  width: 60%;
+  height: 40vh;
 
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+main.login .container-form .content form .title {
+  width: 100%;
+  text-align: start;
+}
+
+main.login .container-form .content form .title h1 {
+  font-size: 3.2em;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+main.login .container-form .content form .fields {
+  width: 100%;
+  height: 40%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+main.login .container-form .content form .fields .field {
+  width: 100%;
+  height: 60px;
+
+  border: 0.13em solid var(--gray-secondary);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main.login .container-form .content form .fields .field .icon-field {
+  width: 10%;
+  color: var(--gray-secondary);
+}
+main.login .container-form .content form .fields .field input {
+  height: 100%;
+  flex: 1;
+
+  font-weight: 500;
+  font-size: large;
+
+  border: none;
+  outline: none;
+}
+
+main.login .container-form .content form .link {
+  width: 100%;
+  text-align: end;
 }

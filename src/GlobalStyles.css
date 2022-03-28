@@ -3,22 +3,23 @@
 *,
 *::after,
 *::before {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
 }
 
 /* Variáveis */
 :root {
-	--bg-main: #ffffff;
-	--primary: #262424;
-	--red: #d21e1e;
-	--gray: #7b7b7b56;
-	--black: #000;
+  --bg-main: #ffffff;
+  --primary: #262424;
+  --red: #d21e1e;
+  --gray: #7b7b7b56;
+  --gray-secondary: #858585;
+  --black: #000;
 }
 
 body {
-	background-color: var(--bg-main);
-	color: var(--primary);
+  background-color: var(--bg-main);
+  color: var(--primary);
 }

@@ -1,8 +1,24 @@
 import React from "react";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import LogoSenai from "../../assets/svgs/LogoSenai.svg";
 import "./style.css";
+import { purple, red } from "@mui/material/colors";
 
 const Login = () => {
+  const focusField = (i) => {
+    document.getElementsByClassName("field")[i].style.borderColor = "#000";
+  };
+
+  const focusOut = (i) => {
+    document.getElementsByClassName("field")[i].style.borderColor =
+      "var(--gray-secondary)";
+  };
+
+  // const fieldStyles = {
+  //   borderColor: fieldFocus ? red : purple,
+  // };
+
   return (
     <main className="login">
       <section className="bg-image"></section>
@@ -16,21 +32,37 @@ const Login = () => {
           />
 
           <form>
-            <h1>Fazer Login</h1>
+            <div className="title">
+              <h1>Fazer Login</h1>
+            </div>
 
             <div className="fields">
-              <div>
-                <span>Icon</span>
-                <input type="email" placeholder="Email" required />
+              <div className="field">
+                <EmailOutlinedIcon className="icon-field" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  onFocus={focusField(0)}
+                  onBlur={focusOut(0)}
+                />
               </div>
 
-              <div>
-                <span>Icon</span>
-                <input type="password" placeholder="Senha" required />
+              <div className="field">
+                <LockOutlinedIcon className="icon-field" />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  required
+                  onFocus={focusField(1)}
+                  onBlur={focusOut(1)}
+                />
               </div>
             </div>
 
-            <p>Esqueci minha senha</p>
+            <div className="link">
+              <p>Esqueci minha senha</p>
+            </div>
 
             <button type="submit">Entrar</button>
           </form>
