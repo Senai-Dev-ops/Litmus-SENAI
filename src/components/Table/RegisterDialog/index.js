@@ -26,7 +26,7 @@ export default function RegisterDialog() {
       <Dialog maxWidth="md" fullWidth={true} open={open} onClose={handleClose}>
         <DialogTitle>
           <div className="containerTitle">
-            <p id="title">Cadastrar Usuário</p>
+            <p id="title">Cadastrar usuário</p>
             <Button sx={{ borderRadius: 50 }} onClick={handleClose}>
               <Avatar>
                 <CloseRoundedIcon />
