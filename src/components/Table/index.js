@@ -17,8 +17,8 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useState } from 'react';
-import TableSearchBar from './Table/TableSearchBar';
-import OptionsDialog from "./Table/OptionsDialog";
+import TableSearchBar from './TableSearchBar';
+import OptionsDialog from "./OptionsDialog";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -119,23 +119,36 @@ const rows = [
     createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum", "Blobloblu Bla"),
     createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum", "Blobloblu Bla"),
     createData('Oreo', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
 ];
 
-export default function CustomTable({rowsNumber}) {
+export default function CustomTable({ rowsNumber }) {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(rowsNumber);
+    const [searchTerm, setSearchTerm] = useState("");
+    var filterCount = 0
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsNumber - rows.length) : 0;
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
     return (
-        <TableContainer component={Paper}>
-            <TableSearchBar />
+        <TableContainer elevation={6} component={Paper}>
+            <TableSearchBar setSearchTerm={setSearchTerm} />
             <Table sx={{ minWidth: 580 }} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
@@ -148,34 +161,41 @@ export default function CustomTable({rowsNumber}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(rowsPerPage > 0
-                        ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : rows
-                    ).map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {row.cpf}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {row.email}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {row.accountType}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {row.role}
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                                <OptionsDialog />
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                    {
+                        (searchTerm.trim() == "" ?
+                            (rowsNumber > 0 ? rows.slice(page * rowsNumber, page * rowsNumber + rowsNumber) : rows)
+                            :
+                            rows.filter((row) => {
+                                if (row.name.toLowerCase().startsWith(searchTerm.trimStart().trimEnd().toLowerCase())) {
+                                    filterCount += 1;
+                                    return row;
+                                }
+                            }).slice(page * rowsNumber, page * rowsNumber + rowsNumber))
+                            .map((row) => (
+                                <StyledTableRow key={row.name}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {row.cpf}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {row.email}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {row.accountType}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {row.role}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">
+                                        <OptionsDialog />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
 
                     {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableRow style={{ height: 58 * emptyRows }}>
                             <TableCell colSpan={6} />
                         </TableRow>
                     )}
@@ -185,12 +205,15 @@ export default function CustomTable({rowsNumber}) {
                         <TablePagination
                             rowsPerPageOptions={[]}
                             colSpan={6}
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
+                            count={filterCount > 0 ? filterCount : rows.length}
+                            rowsPerPage={rowsNumber}
                             page={page}
                             labelDisplayedRows={
                                 ({ from, to, count }) => {
-                                  return (page + 1) + ' de ' + Math.max(0, Math.ceil(count / rowsPerPage))
+                                    if(searchTerm != "") {
+                                        return (page + 1) + ' de ' + Math.max(0, Math.ceil(filterCount / rowsNumber))
+                                    }
+                                    return (page + 1) + ' de ' + Math.max(0, Math.ceil(count / rowsNumber))
                                 }
                             }
                             SelectProps={{
