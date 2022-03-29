@@ -43,8 +43,16 @@ const Login = () => {
                   type="email"
                   placeholder="Email"
                   required
-                  onFocus={focusField(0)}
-                  onBlur={focusOut(0)}
+                  onFocus={() => {
+                    const a = (document.getElementsByClassName(
+                      "field"
+                    )[0].style.borderColor = "#000");
+                  }}
+                  onBlur={() => {
+                    const a = (document.getElementsByClassName(
+                      "field"
+                    )[0].style.borderColor = "var(--gray-secondary)");
+                  }}
                 />
               </div>
 
@@ -54,8 +62,16 @@ const Login = () => {
                   type="password"
                   placeholder="Senha"
                   required
-                  onFocus={focusField(1)}
-                  onBlur={focusOut(1)}
+                  onFocus={() => {
+                    const a = (document.getElementsByClassName(
+                      "field"
+                    )[1].style.borderColor = "#000");
+                  }}
+                  onBlur={() => {
+                    const a = (document.getElementsByClassName(
+                      "field"
+                    )[1].style.borderColor = "var(--gray-secondary)");
+                  }}
                 />
               </div>
             </div>
