@@ -7,9 +7,11 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { useNavigate } from "react-router-dom";
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const Navbar = () => {
+  const Navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -20,6 +22,9 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  
+  
+    
   return (
     <>
       <div className="container-space">
@@ -48,8 +53,8 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><SettingsIcon/> Gerenciar Usuários</MenuItem>
-                <MenuItem onClick={handleClose}><ExitToAppIcon/> Logout</MenuItem>
+                <MenuItem onClick={()=>{Navigate('/admin')}}><SettingsIcon/> Gerenciar Usuários</MenuItem>
+                <MenuItem onClick={()=>{Navigate('/')}}><ExitToAppIcon/> Logout</MenuItem>
               </Menu>
             </div>
           </div>
