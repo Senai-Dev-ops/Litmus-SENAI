@@ -48,11 +48,8 @@ export default function RegisterDialog() {
               </div>
 
               <div className="areaInput">
-                <label>Tipo de conta</label>
-                <select>
-                  <option>Administrador</option>
-                  <option>Comum</option>
-                </select>
+                <label>Data de nascimento</label>
+                <input type="date"></input>
               </div>
             </div>
 
@@ -63,9 +60,14 @@ export default function RegisterDialog() {
               </div>
 
               <div className="areaInput">
-                <label>Data de nascimento</label>
-                <input type="date"></input>
+                <label>Tipo de conta</label>
+                <select>
+                  <option>Administrador</option>
+                  <option>Comum</option>
+                </select>
               </div>
+
+
             </div>
           </div>
         </DialogContent>

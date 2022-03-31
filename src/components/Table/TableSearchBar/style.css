@@ -10,6 +10,7 @@
 .separator {
     width: 30%;
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
 
@@ -17,7 +18,7 @@
     margin-left: 5em;
     width: 60%;
     height: 2.5em;
-    padding-left: 12px;
+    padding: 12px;
     border: 0.4px solid #7a7a7a;
     border-radius: 20px;
 }

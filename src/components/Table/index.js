@@ -31,10 +31,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    // '&:nth-of-type(odd)': {
-    //     backgroundColor: "#B0C2E3",
-    // },
-    // hide last border
     '&:last-child td, &:last-child th': {
         border: 0,
     },
@@ -138,7 +134,6 @@ export default function CustomTable({ rowsNumber }) {
     const [searchTerm, setSearchTerm] = useState("");
     var filterCount = 0
 
-    // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsNumber - rows.length) : 0;
 
@@ -148,9 +143,14 @@ export default function CustomTable({ rowsNumber }) {
 
     return (
         <TableContainer elevation={6} component={Paper}>
-            <TableSearchBar setSearchTerm={setSearchTerm} />
+
             <Table sx={{ minWidth: 580 }} aria-label="custom pagination table">
                 <TableHead>
+                    <TableRow>
+                        <TableCell colSpan={8} style={{backgroundColor: "#E8EAED", padding: 2}}>
+                            <TableSearchBar setSearchTerm={setSearchTerm} />
+                        </TableCell>
+                    </TableRow>
                     <TableRow>
                         <StyledTableCell>NOME</StyledTableCell>
                         <StyledTableCell align="center">CPF</StyledTableCell>
@@ -195,14 +195,15 @@ export default function CustomTable({ rowsNumber }) {
                             ))}
 
                     {emptyRows > 0 && (
-                        <TableRow style={{ height: 58 * emptyRows }}>
-                            <TableCell colSpan={6} />
-                        </TableRow>
+                        <StyledTableRow style={{ height: 58 * emptyRows }}>
+                            <StyledTableCell colSpan={6} />
+                        </StyledTableRow>
                     )}
                 </TableBody>
                 <TableFooter>
                     <TableRow>
                         <TablePagination
+                            sx={{display: "flex", justifyContent: "flex-start", minWidth: 300}}
                             rowsPerPageOptions={[]}
                             colSpan={6}
                             count={filterCount > 0 ? filterCount : rows.length}
@@ -210,7 +211,7 @@ export default function CustomTable({ rowsNumber }) {
                             page={page}
                             labelDisplayedRows={
                                 ({ from, to, count }) => {
-                                    if(searchTerm != "") {
+                                    if (searchTerm != "") {
                                         return (page + 1) + ' de ' + Math.max(0, Math.ceil(filterCount / rowsNumber))
                                     }
                                     return (page + 1) + ' de ' + Math.max(0, Math.ceil(count / rowsNumber))
