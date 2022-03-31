@@ -44,7 +44,7 @@ export default function RegisterDialog() {
 
               <div className="areaInput">
                 <label>CPF</label>
-                <input type="text"></input>
+                <input type="text" pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}"></input>
               </div>
 
               <div className="areaInput">
@@ -59,7 +59,7 @@ export default function RegisterDialog() {
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email"></input>
+                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?"></input>
               </div>
 
               <div className="areaInput">
