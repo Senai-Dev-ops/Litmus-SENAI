@@ -134,6 +134,8 @@ const Login = () => {
 									sx={{
 										position: "absolute",
 										bottom: "70%",
+										height: "min-content",
+										overflow: "hidden",
 									}}
 								>
 									<div className="alert-password">
