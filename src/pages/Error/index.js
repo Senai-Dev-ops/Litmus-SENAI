@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ErrorImage from "../../assets/images/error.png";
-import LogoSenai from "../../assets/svgs/LogoSenai.svg";
 import "./style.css";
 
 const textDefault = "A página que você está procurando não existe.";
