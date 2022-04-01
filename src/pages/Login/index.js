@@ -1,53 +1,24 @@
 import React, { forwardRef, useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Dialog, DialogContent, Slide } from "@mui/material";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { useNavigate } from "react-router-dom";
+
+import ChangeColors from "../../utils/Login/ChangeColors";
 import LogoSenai from "../../assets/svgs/LogoSenai.svg";
 import "./style.css";
-
-const Transition = forwardRef((props, ref) => {
-	return <Slide direction="down" ref={ref} {...props} />;
-});
+import ForgotPassword from "../../components/ForgotPassword";
 
 const Login = () => {
-	const [colorIconEmail, setColorIconEmail] = useState("var(--gray-secondary)");
-	const [colorIconLock, setColorIconLock] = useState("var(--gray-secondary)");
+	const changeColors = ChangeColors();
+	const navigate = useNavigate();
 
-	const changeIconColor = (focus, icon) => {
-		if (icon === "email") {
-			setColorIconEmail(() =>
-				focus ? "var(--primary)" : "var(--gray-secondary)"
-			);
-		} else if (icon === "lock") {
-			setColorIconLock(() =>
-				focus ? "var(--primary)" : "var(--gray-secondary)"
-			);
-		}
-	};
-
-	const [borderColorFieldEmail, setBorderColorFieldEmail] = useState(
-		"var(--gray-secondary)"
-	);
-	const [borderColorFieldPassword, setBorderColorFieldPassword] = useState(
-		"var(--gray-secondary)"
-	);
-
-	const changeBorderColor = (focus, field) => {
-		if (field === "email") {
-			setBorderColorFieldEmail(() =>
-				focus ? "var(--primary)" : "var(--gray-secondary)"
-			);
-		} else if (field === "password") {
-			setBorderColorFieldPassword(() =>
-				focus ? "var(--primary)" : "var(--gray-secondary)"
-			);
-		}
-	};
-
-	const [open, setOpen] = useState(false);
-	const handleClickOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const {
+		icons: [colorIconEmail, colorIconLock],
+	} = changeColors;
+	const {
+		borders: [borderColorFieldEmail, borderColorFieldPassword],
+	} = changeColors;
+	const { changeBorderColor, changeIconColor } = changeColors;
 
 	return (
 		<main className="login">
@@ -64,7 +35,11 @@ const Login = () => {
 							/>
 						</div>
 
-						<form>
+						<form
+							onSubmit={() => {
+								navigate("/dashboard");
+							}}
+						>
 							<div className="title">
 								<h1>Fazer login</h1>
 							</div>
@@ -118,44 +93,7 @@ const Login = () => {
 							</div>
 
 							<div className="box-link">
-								<button
-									type="button"
-									className="false-link"
-									onClick={handleClickOpen}
-								>
-									Esqueci minha senha
-								</button>
-								<Dialog
-									open={open}
-									TransitionComponent={Transition}
-									keepMounted
-									onClose={handleClose}
-									aria-describedby="alert-dialog-slide-description"
-									sx={{
-										position: "absolute",
-										bottom: "70%",
-										height: "min-content",
-										overflow: "hidden",
-									}}
-								>
-									<div className="alert-password">
-										<div className="title">
-											<ErrorOutlineIcon
-												color="error"
-												sx={{ marginRight: 1, fontSize: 36 }}
-											/>
-											<h4>Esqueceu a senha?</h4>
-										</div>
-										<DialogContent>
-											<div className="dialog-content-text">
-												Contate um administrador para recuperar sua senha.
-											</div>
-										</DialogContent>
-										<div className="dialog-btn-confirm">
-											<button onClick={handleClose}>Entendi</button>
-										</div>
-									</div>
-								</Dialog>
+								<ForgotPassword />
 							</div>
 
 							<button type="submit" className="btn">
