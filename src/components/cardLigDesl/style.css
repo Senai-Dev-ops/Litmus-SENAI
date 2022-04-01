@@ -1,22 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
-
 /*Div pai*/
-.container{
+.container-lig-off{
     background-color: #F5F5F5;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-
-    position: absolute;
     width: 258px;
-    height: 175px;
 
-    left: 50%;
+    height: 175px;
+    /* left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
 /*Contéudo escrito*/
-.content{
+.content-lig-off{
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -25,12 +21,16 @@
     letter-spacing: 0.25px;
     font-family: 'Nunito';
 
+    padding-top: 29px;
+    padding-bottom: 20px;
+    
+
     color: #000000;
 }
 
 /*Estilo Toggle Button*/
 /*Toggle Button*/
-.switch{
+.switch-lig-off{
     position: relative;
     display: inline-block;
 
@@ -39,14 +39,14 @@
     left: 38px;
 }
 
-.switch input{
+.switch-lig-off input{
     opacity: 0;
     width: 0;
     height: 0;
     filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.25));
 }
 
-.slider{
+.slider-lig-off{
     position: absolute;
     cursor: pointer;
 
@@ -63,7 +63,7 @@
 }
 
 /*Circulo da alternância*/
-.slider:before{
+.slider-lig-off:before{
     position: absolute;
     content: "";
     left: 23px;
@@ -78,11 +78,11 @@
 }
 
 /*Fundo da alertância*/
-input:checked + .slider:before{
+input:checked + .slider-lig-off:before{
     background-color: #42D21E;
 }
 
 /*Distância do alternância do circulo ao clicar*/
-input:checked + .slider:before{
+input:checked + .slider-lig-off:before{
     transform: translateX(84.5px);
 }

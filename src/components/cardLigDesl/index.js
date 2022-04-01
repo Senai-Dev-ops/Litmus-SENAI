@@ -1,16 +1,16 @@
 import React from "react";
 import "./style.css";
 
-const ToggleButton = () => {
+const CardLigDesl = () => {
   return (
-    <div className="container">
-        <h3 className="content">Desligado / Ligado</h3>
-        <label className="switch">
-          <input type="checkbox" />
-          <span className="slider" />
+    <div className="container-lig-off">
+        <h3 className="content-lig-off">Desligado / Ligado</h3>
+        <label className="switch-lig-off">
+          <input/>
+          <span className="slider-lig-off" />
         </label>
     </div>
   );
 };
 
-export default ToggleButton;
+export default CardLigDesl;
