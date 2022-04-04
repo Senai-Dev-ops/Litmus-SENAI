@@ -6,20 +6,20 @@ import "./style.css";
 const Admin = () => {
   return (
     <div>
-      <Header />
+      <Header titleHeader="Gerenciamento" />
 
       <div className="containerTable">
-        <div style={{
-          width: "90%",
-          margin: 50
-        }}>
+        <div
+          style={{
+            width: "90%",
+            margin: 50,
+          }}
+        >
           <CustomTable rowsNumber={7} />
         </div>
       </div>
     </div>
-
   );
-
 };
 
 export default Admin;

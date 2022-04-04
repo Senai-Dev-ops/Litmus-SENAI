@@ -1,14 +1,14 @@
 import React from "react";
-import Navbar from "../../components/Header";
+import Header from "../../components/Header";
 import CardLigDesl from "../../components/CardLigDesl";
 import CardTimeExecution from "../../components/CardTimeExecution";
 
 const Dashboard = () => {
   return (
     <>
-      <Navbar />
-        <CardLigDesl />
-        <CardTimeExecution />
+      <Header titleHeader="Dashboard" />
+      <CardLigDesl />
+      <CardTimeExecution />
     </>
   );
 };

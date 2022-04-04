@@ -5,13 +5,13 @@ import Dscr from "../../assets/images/descri.png";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import SettingsIcon from "@material-ui/icons/Settings";
 import { useNavigate } from "react-router-dom";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-const Navbar = () => {
-  const Navigate = useNavigate()
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+const Header = ({ titleHeader }) => {
+  const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -22,9 +22,6 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  
-  
-    
   return (
     <>
       <div className="container-space">
@@ -34,7 +31,7 @@ const Navbar = () => {
             <img className="descript-logo" src={Dscr} alt=""></img>
           </div>
 
-          <div className="page">DASHBOARD</div>
+          <div className="page">{titleHeader}</div>
 
           <div className="user">
             <div className="username">
@@ -53,8 +50,20 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={()=>{Navigate('/admin')}}><SettingsIcon/> Gerenciar Usuários</MenuItem>
-                <MenuItem onClick={()=>{Navigate('/')}}><ExitToAppIcon/> Logout</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    Navigate("/admin");
+                  }}
+                >
+                  <SettingsIcon /> Gerenciar Usuários
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    Navigate("/");
+                  }}
+                >
+                  <ExitToAppIcon /> Logout
+                </MenuItem>
               </Menu>
             </div>
           </div>
@@ -64,4 +73,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;
