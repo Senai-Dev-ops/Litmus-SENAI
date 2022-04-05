@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
@@ -9,102 +9,116 @@ import "./style.css";
 import ForgotPassword from "../../components/ForgotPassword";
 
 const Login = () => {
-	const changeColors = ChangeColors();
-	const navigate = useNavigate();
+  const changeColors = ChangeColors();
+  const navigate = useNavigate();
 
-	const {
-		icons: [colorIconEmail, colorIconLock],
-	} = changeColors;
-	const {
-		borders: [borderColorFieldEmail, borderColorFieldPassword],
-	} = changeColors;
-	const { changeBorderColor, changeIconColor } = changeColors;
+  const {
+    icons: [colorIconEmail, colorIconLock],
+  } = changeColors;
+  const {
+    borders: [borderColorFieldEmail, borderColorFieldPassword],
+  } = changeColors;
+  const { changeBorderColor, changeIconColor } = changeColors;
 
-	return (
-		<main className="login">
-			<section className="bg-image"></section>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-			<section className="container-form">
-				<div className="box-content">
-					<div className="content">
-						<div className="box-logo">
-							<img
-								src={LogoSenai}
-								alt="Logo Senai Vermelho"
-								className="logo-senai"
-							/>
-						</div>
+  const signIn = () => {
+    // [] fazer requisição com o back para a verificação do email e senha, e o tipo de user.
+    console.log("entrou");
+    navigate("/dashboard");
+  };
 
-						<form
-							onSubmit={() => {
-								navigate("/dashboard");
-							}}
-						>
-							<div className="title">
-								<h1>Fazer login</h1>
-							</div>
+  return (
+    <main className="login">
+      <section className="bg-image"></section>
 
-							<div className="fields">
-								<div
-									className="field"
-									style={{ borderColor: borderColorFieldEmail }}
-								>
-									<EmailOutlinedIcon
-										className="icon-field"
-										style={{ color: colorIconEmail }}
-									/>
-									<input
-										type="email"
-										placeholder="Email"
-										required
-										onFocus={() => {
-											changeBorderColor(true, "email");
-											changeIconColor(true, "email");
-										}}
-										onBlur={() => {
-											changeBorderColor(false, "email");
-											changeIconColor(false, "email");
-										}}
-									/>
-								</div>
+      <section className="container-form">
+        <div className="box-content">
+          <div className="content">
+            <div className="box-logo">
+              <img
+                src={LogoSenai}
+                alt="Logo Senai Vermelho"
+                className="logo-senai"
+              />
+            </div>
 
-								<div
-									className="field"
-									style={{ borderColor: borderColorFieldPassword }}
-								>
-									<LockOutlinedIcon
-										className="icon-field"
-										style={{ color: colorIconLock }}
-									/>
-									<input
-										type="password"
-										placeholder="Senha"
-										required
-										onFocus={() => {
-											changeBorderColor(true, "password");
-											changeIconColor(true, "lock");
-										}}
-										onBlur={() => {
-											changeBorderColor(false, "password");
-											changeIconColor(false, "lock");
-										}}
-									/>
-								</div>
-							</div>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                signIn();
+              }}
+            >
+              <div className="title">
+                <h1>Fazer login</h1>
+              </div>
 
-							<div className="box-link">
-								<ForgotPassword />
-							</div>
+              <div className="fields">
+                <div
+                  className="field"
+                  style={{ borderColor: borderColorFieldEmail }}
+                >
+                  <EmailOutlinedIcon
+                    className="icon-field"
+                    style={{ color: colorIconEmail }}
+                  />
+                  <input
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    required
+                    onFocus={() => {
+                      changeBorderColor(true, "email");
+                      changeIconColor(true, "email");
+                    }}
+                    onBlur={() => {
+                      changeBorderColor(false, "email");
+                      changeIconColor(false, "email");
+                    }}
+                  />
+                </div>
 
-							<button type="submit" className="btn">
-								Entrar
-							</button>
-						</form>
-					</div>
-				</div>
-			</section>
-		</main>
-	);
+                <div
+                  className="field"
+                  style={{ borderColor: borderColorFieldPassword }}
+                >
+                  <LockOutlinedIcon
+                    className="icon-field"
+                    style={{ color: colorIconLock }}
+                  />
+                  <input
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    type="password"
+                    placeholder="Senha"
+                    required
+                    onFocus={() => {
+                      changeBorderColor(true, "password");
+                      changeIconColor(true, "lock");
+                    }}
+                    onBlur={() => {
+                      changeBorderColor(false, "password");
+                      changeIconColor(false, "lock");
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="box-link">
+                <ForgotPassword />
+              </div>
+
+              <button type="submit" className="btn">
+                Entrar
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 };
 
 export default Login;
