@@ -10,6 +10,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
 import "./style.css";
 
+
 export default function RegisterDialog() {
   const [open, setOpen] = useState(false);
 
@@ -34,29 +35,38 @@ export default function RegisterDialog() {
             </Button>
           </div>
         </DialogTitle>
+
         <DialogContent>
           <div className="containerForm">
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Nome</label>
-                <input type="text"></input>
+                <input type="text" />
               </div>
 
               <div className="areaInput">
                 <label>CPF</label>
-                <input type="text" pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}"></input>
+                <input type="text" pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}" maxLength="14" onKeyPress={(evt) => {
+                  var key = (evt.which) ? evt.which : evt.keyCode
+
+                  if (key > 31 && (key < 48 || key > 57)) {
+                    evt.preventDefault();
+                  }
+                }} onBlur={(evt) => {
+                  evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]+)/, "$1.$2.$3-$4")
+                }} />
               </div>
 
               <div className="areaInput">
                 <label>Data de nascimento</label>
-                <input type="date"></input>
+                <input type="date" />
               </div>
             </div>
 
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?"></input>
+                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" />
               </div>
 
               <div className="areaInput">
