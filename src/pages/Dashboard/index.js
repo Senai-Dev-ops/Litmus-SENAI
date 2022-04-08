@@ -3,14 +3,75 @@ import Header from "../../components/Header";
 import CardLigDesl from "../../components/CardLigDesl";
 import CardTimeExecution from "../../components/CardTimeExecution";
 import ChartRpm from "../../components/ChartRpm"
+import { Grid } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import { Paper } from "@material-ui/core";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#F4F4F4',
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  borderRadius: 10,
+  filter: "drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.25))"
+}));
 
 const Dashboard = () => {
   return (
     <>
       <Header titleHeader="Dashboard" />
-      <CardLigDesl />
-      <CardTimeExecution />
-      <ChartRpm />
+
+      <div style={{ padding: 15 }}>
+        <Grid container spacing={3} rowSpacing={4}>
+          <Grid item xs={2}>
+            <Item><CardLigDesl /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs={3}>
+            <Item><ChartRpm /></Item>
+          </Grid>
+
+        </Grid>
+      </div>
+
     </>
   );
 };

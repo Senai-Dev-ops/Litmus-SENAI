@@ -11,8 +11,6 @@ function ChartRpm() {
           color={'#EA4228  '} //cor da barra
           max={300} // valor maximo do grafico
           label={"Gráfico RPM"}
-          width={500} //largura
-          height={500} //altura
           topLabelStyle={{  //STYLE DO TITULO, DISPLAY NONE (Para nao mostrar)
             display: "none",
           }}
