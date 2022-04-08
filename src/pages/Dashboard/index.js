@@ -20,52 +20,52 @@ const Dashboard = () => {
     <>
       <Header titleHeader="Dashboard" />
 
-      <div style={{ padding: 15 }}>
+      <div style={{ padding: 15}}>
         <Grid container spacing={3} rowSpacing={4}>
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardLigDesl /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
-          <Grid item xs={2}>
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs={2}>
+          <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs="auto">
+            <Item><CardTimeExecution /></Item>
+          </Grid>
+
+          <Grid item xs="auto">
             <Item><ChartRpm /></Item>
           </Grid>
 
