@@ -1,76 +1,99 @@
 import React from "react";
-import "./style.css";
 import LgSenai from "../../assets/images/senai.png";
 import Dscr from "../../assets/images/descri.png";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from "@material-ui/icons/Settings";
+import InsightsIcon from "@mui/icons-material/Insights";
 import { useNavigate } from "react-router-dom";
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import "./style.css";
+
 const Header = ({ titleHeader }) => {
-  const Navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+	const username = "James Ferreira";
+	const Navigate = useNavigate();
+	const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 
-  return (
-    <>
-      <div className="container-space">
-        <div className="top">
-          <div className="logo">
-            <img className="lg-senai" src={LgSenai} alt=""></img>
-            <img className="descript-logo" src={Dscr} alt=""></img>
-          </div>
+	return (
+		<>
+			<div className="container-space">
+				<div className="top">
+					<div className="logo">
+						<img className="lg-senai" src={LgSenai} alt="logo senai" />
+						<img className="descript-logo" src={Dscr} alt="descrição senai" />
+					</div>
 
-          <div className="page">{titleHeader}</div>
+					<h1 className="page">{titleHeader}</h1>
 
-          <div className="user">
-            <div className="username">
-              userName
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <ExpandMoreIcon color="primary" />
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    Navigate("/admin");
-                  }}
-                >
-                  <SettingsIcon /> Gerenciar Usuários
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    Navigate("/");
-                  }}
-                >
-                  <ExitToAppIcon /> Logout
-                </MenuItem>
-              </Menu>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+					<div className="menu">
+						<div className="options-menu">
+							<h4 className="username" onClick={handleClick}>
+								{username}
+							</h4>
+							<IconButton onClick={handleClick}>
+								<ExpandMoreIcon color="action" />
+							</IconButton>
+							<Menu
+								id="simple-menu"
+								anchorEl={anchorEl}
+								keepMounted
+								open={Boolean(anchorEl)}
+								onClose={handleClose}
+							>
+								<MenuItem
+									onClick={() => {
+										Navigate("/admin");
+									}}
+								>
+									<div className="items-menu-header">
+										<SettingsIcon style={{ marginRight: "8px" }} />
+										<p>Gerenciar Usuários</p>
+									</div>
+								</MenuItem>
+								<MenuItem
+									onClick={() => {
+										Navigate("/dashboard");
+									}}
+								>
+									<div className="items-menu-header">
+										<InsightsIcon style={{ marginRight: "8px" }} />
+										<p>Dashboard</p>
+									</div>
+								</MenuItem>
+								<MenuItem
+									onClick={() => {
+										Navigate("/");
+									}}
+								>
+									<div className="items-menu-header">
+										<ExitToAppIcon style={{ marginRight: "8px" }} />
+										<p>Logout</p>
+									</div>
+								</MenuItem>
+							</Menu>
+						</div>
+					</div>
+
+					<div className="menu-mobile">
+						<IconButton>
+							<MenuIcon sx={{ fontSize: 40 }} />
+						</IconButton>
+					</div>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default Header;
