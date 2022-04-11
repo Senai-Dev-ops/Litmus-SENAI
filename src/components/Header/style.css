@@ -107,6 +107,12 @@
 }
 
 @media screen and (max-width: 469px) {
+    .container-space {
+        width: 100%
+    }
+    .top{
+        width: 100%;
+    }
     .menu {
         display: none;
     }
