@@ -48,14 +48,6 @@ const Dashboard = () => {
           <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
-
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
           <Grid item xs="auto">
             <Item><CardTimeExecution /></Item>
           </Grid>
