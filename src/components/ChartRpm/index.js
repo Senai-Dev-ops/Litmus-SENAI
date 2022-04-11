@@ -4,7 +4,6 @@ import Gauge from "react-svg-gauge";
 function ChartRpm() {
   return (
     <>
-      <div className="Gauge">
         <Gauge
           value={150} //valor exibido
           min={0} //valor minimo
@@ -14,11 +13,12 @@ function ChartRpm() {
           topLabelStyle={{  //STYLE DO TITULO, DISPLAY NONE (Para nao mostrar)
             display: "none",
           }}
+          height={210}
           valueLabelStyle={{  //style do resultado
             textAnchor: "middle",
             fill: "#010101",
             fontStyle: "normal",
-            fontSize: 45,
+            fontSize: 40,
             fontVariant: "normal",
             fontWeight: "bold",
             fontStretch: "normal",
@@ -27,7 +27,6 @@ function ChartRpm() {
           }}
           valueFormatter={number => `${number} RPM`} //formato do valor
         />
-      </div>
     </>
 
   );

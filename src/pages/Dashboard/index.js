@@ -6,6 +6,9 @@ import ChartRpm from "../../components/ChartRpm"
 import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { Paper } from "@material-ui/core";
+import ChartFeedRate from "../../components/ChartFeedRate";
+import ChartTemperature from "../../components/ChartTemperature";
+import ChartArea from "../../components/ChartArea";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#F4F4F4',
@@ -19,50 +22,40 @@ const Dashboard = () => {
     <>
       <Header titleHeader="Dashboard" />
 
-      <div style={{padding: 20}}>
-        <Grid container spacing={3} rowSpacing={4}>
-          <Grid item xs="auto">
-            <Item><CardLigDesl /></Item>
+      <div style={{ padding: 30 }}>
+        <Grid container spacing={4} rowSpacing={4}>
+          <Grid container item justifyContent={"center"} spacing={4} rowSpacing={4}>
+            <Grid item xs="auto">
+              <Item><CardLigDesl /></Item>
+            </Grid>
+
+            <Grid item xs="auto">
+              <Item><CardTimeExecution /></Item>
+            </Grid>
+
           </Grid>
 
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
+          
+          <Grid container item spacing={4} justifyContent={"center"} rowSpacing={4}>
+            <Grid item xs="auto" md="4">
+              <Item><ChartFeedRate /></Item>
+            </Grid>
 
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
+            <Grid item xs="auto" md="4">
+              <Item><ChartTemperature /></Item>
+            </Grid>
 
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
+            <Grid item xs="auto" md="4">
+              <Item><ChartArea /></Item>
+            </Grid>
 
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item><CardTimeExecution /></Item>
-          </Grid>
-
-          <Grid item xs="auto">
+            {/* <Grid item xs="auto" md="4">
             <Item><ChartRpm /></Item>
+          </Grid> */}
           </Grid>
 
         </Grid>
       </div>
-
     </>
   );
 };
