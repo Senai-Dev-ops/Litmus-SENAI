@@ -11,11 +11,13 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
+import MenuMobile from "../MenuMobile";
 
 const Header = ({ titleHeader }) => {
   const username = "James Ferreira";
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const userAdmin = true;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -58,16 +60,19 @@ const Header = ({ titleHeader }) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem
-                  onClick={() => {
-                    Navigate("/admin");
-                  }}
-                >
-                  <div className="items-menu-header">
-                    <SettingsIcon style={{ marginRight: "8px" }} />
-                    <p>Gerenciar Usuários</p>
-                  </div>
-                </MenuItem>
+                {userAdmin && (
+                  <MenuItem
+                    onClick={() => {
+                      Navigate("/admin");
+                    }}
+                  >
+                    <div className="items-menu-header">
+                      <SettingsIcon style={{ marginRight: "8px" }} />
+                      <p>Gerenciar Usuários</p>
+                    </div>
+                  </MenuItem>
+                )}
+
                 <MenuItem
                   onClick={() => {
                     Navigate("/dashboard");
@@ -93,6 +98,7 @@ const Header = ({ titleHeader }) => {
           </div>
 
           <div className="menu-mobile">
+            <MenuMobile />
             <IconButton>
               <MenuIcon sx={{ fontSize: 40 }} />
             </IconButton>
