@@ -1,65 +1,94 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import InsightsIcon from "@mui/icons-material/Insights";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IconButton } from "@mui/material";
+import "./style.css";
+import { useNavigate } from "react-router-dom";
 
-export default function MenuMobile() {
-  const [state, setState] = React.useState({
-    right: false,
-  });
+export default function MenuMobile({ pageName, user, typeUser }) {
+	const navigate = useNavigate();
+	const verifyTypeUser = () => {
+		return typeUser ? "Administrador" : "Usuário Comum";
+	};
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
+	const [state, setState] = React.useState({
+		right: false,
+	});
 
-    setState({ ...state, [anchor]: open });
-  };
+	const toggleDrawer = (anchor, open) => (event) => {
+		if (
+			event &&
+			event.type === "keydown" &&
+			(event.key === "Tab" || event.key === "Shift")
+		) {
+			return;
+		}
 
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary="Gerenciar Usuários" />
-        </ListItem>
-      </List>
-      <Divider />
-    </Box>
-  );
+		setState({ ...state, [anchor]: open });
+	};
 
-  return (
-    <div>
-      {["right"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+	return (
+		<React.Fragment>
+			<IconButton onClick={toggleDrawer("right", true)}>
+				<MenuIcon sx={{ fontSize: 35 }} />
+			</IconButton>
+			<SwipeableDrawer
+				anchor={"right"}
+				open={state["right"]}
+				onClose={toggleDrawer("right", false)}
+				onOpen={toggleDrawer("right", true)}
+			>
+				<Box
+					sx={{ width: 270 }}
+					onClick={toggleDrawer("right", false)}
+					onKeyDown={toggleDrawer("right", false)}
+				>
+					<List>
+						<ListItem>
+							<h1 className="pageName-menu-mobile">{pageName}</h1>
+						</ListItem>
+						<ListItem>
+							<div className="item-menu-mobile-user">
+								<h4 className="userName-menu-mobile">{user}</h4>
+								<span className="typeuUser-menu-mobile">
+									{verifyTypeUser()}
+								</span>
+							</div>
+						</ListItem>
+					</List>
+					<Divider />
+					<List>
+						<ListItem button onClick={() => navigate("/admin")}>
+							<ListItemIcon>
+								<SettingsIcon />
+							</ListItemIcon>
+							<ListItemText primary="Gerenciar Usuários" />
+						</ListItem>
+						<ListItem button onClick={() => navigate("/dashboard")}>
+							<ListItemIcon>
+								<InsightsIcon />
+							</ListItemIcon>
+							<ListItemText primary="Dashboard" />
+						</ListItem>
+						<ListItem button onClick={() => navigate("/")}>
+							<ListItemIcon>
+								<ExitToAppIcon />
+							</ListItemIcon>
+							<ListItemText primary="Sair" />
+						</ListItem>
+					</List>
+					<Divider />
+				</Box>
+			</SwipeableDrawer>
+		</React.Fragment>
+	);
 }
