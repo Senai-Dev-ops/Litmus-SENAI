@@ -49,6 +49,7 @@ export default function ChartTemperature() {
 
   return (
     <>
+      <h2 style={{fontFamily: "Nunito"}}>Temperatura</h2>
       <Chart
         options={{...options}}
         series={mockData.series}

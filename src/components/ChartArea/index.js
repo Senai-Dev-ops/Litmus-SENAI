@@ -54,6 +54,7 @@ export default function ChartArea() {
 
   return (
     <>
+      <h2 style={{fontFamily: "Nunito"}}>Rotação por minuto</h2>
       <Chart
         options={{ ...options }}
         type="area"

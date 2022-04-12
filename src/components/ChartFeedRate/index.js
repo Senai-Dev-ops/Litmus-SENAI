@@ -46,6 +46,7 @@ export default function ChartFeedRate() {
 
     return (
         <>
+            <h2 style={{fontFamily: "Nunito"}}>Velocidade de avanço</h2>
             <Chart
                 options={{ ...options }}
                 type="line"
