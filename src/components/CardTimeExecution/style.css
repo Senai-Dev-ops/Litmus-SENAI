@@ -47,7 +47,7 @@
 }
 
 /*Style dos "h"*/
-h1{/*Número*/
+.h1-execution{/*Número*/
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -56,13 +56,13 @@ h1{/*Número*/
 
     color: #000000;
 }
-h2{/*"seg"*/
+.h2-execution{/*"seg"*/
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
 }
-h3 {/*Titulo principal*/
+.h3-execution{/*Titulo principal*/
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 600;
