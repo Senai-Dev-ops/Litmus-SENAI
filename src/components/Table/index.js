@@ -102,31 +102,31 @@ function createData(name, cpf, email, accountType, role) {
 }
 
 const rows = [
-    createData('Rhandryz João', "836.757.770-14", "rhandryz_games@email.com", "Administrador", "Blobloblu Bla"),
-    createData('Gabriel S. B. de Hahaha', "198.051.170-57", "gabraiolaser@email.com", "Comum", "Bala de Icekiss"),
-    createData('Jhonatan Calleri', "921.238.100-61", "calleri.mouse@email.com", "Comum", "Blobloblu Bla"),
-    createData('Antônio João', "067.873.580-83", "antonio.lindo@email.com", "Comum", "Blobloblu Bla"),
-    createData('Cauã Absolut Bittencourt', "050.238.620-70", "craft.e.muls@email.com", "Comum", "Blobloblu Bla"),
-    createData('Emiliano Rigoni', "337.031.700-18", "rigoni_mil_grau@email.com", "Comum", "Blobloblu Bla"),
-    createData('Luciano Neves', "597.085.160-40", "lulu11@email.com", "Comum", "Blobloblu Bla"),
-    createData('Diego Costa', "267.761.220-83", "diegao.da.massa@email.com", "Comum", "Blobloblu Bla"),
-    createData('Rogério Ceni', "021.369.210-45", "m1to_calvo@email.com", "Comum", "Blobloblu Bla"),
-    createData('Lollipop', "121.369.910-46", "lollipop.lol@email.com", "Comum", "Blobloblu Bla"),
-    createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum", "Blobloblu Bla"),
-    createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
-    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum", "Blobloblu Bla"),
+    createData('Rhandryz João', "836.757.770-14", "rhandryz_games@email.com", "Administrador"),
+    createData('Gabriel S. B. de Hahaha', "198.051.170-57", "gabraiolaser@email.com", "Comum"),
+    createData('Jhonatan Calleri', "921.238.100-61", "calleri.mouse@email.com", "Comum"),
+    createData('Antônio João', "067.873.580-83", "antonio.lindo@email.com", "Comum"),
+    createData('Cauã Absolut Bittencourt', "050.238.620-70", "craft.e.muls@email.com", "Comum"),
+    createData('Emiliano Rigoni', "337.031.700-18", "rigoni_mil_grau@email.com", "Comum"),
+    createData('Luciano Neves', "597.085.160-40", "lulu11@email.com", "Comum"),
+    createData('Diego Costa', "267.761.220-83", "diegao.da.massa@email.com", "Comum"),
+    createData('Rogério Ceni', "021.369.210-45", "m1to_calvo@email.com", "Comum"),
+    createData('Lollipop', "121.369.910-46", "lollipop.lol@email.com", "Comum"),
+    createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum"),
+    createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum"),
+    createData('Oreo', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum"),
 ];
 
 export default function CustomTable({ rowsNumber }) {
@@ -156,7 +156,6 @@ export default function CustomTable({ rowsNumber }) {
                         <StyledTableCell align="center">CPF</StyledTableCell>
                         <StyledTableCell align="center">EMAIL</StyledTableCell>
                         <StyledTableCell align="center">CONTA</StyledTableCell>
-                        <StyledTableCell align="center">CARGO</StyledTableCell>
                         <StyledTableCell align="center"> </StyledTableCell>
                     </TableRow>
                 </TableHead>
@@ -184,9 +183,6 @@ export default function CustomTable({ rowsNumber }) {
                                     </StyledTableCell>
                                     <StyledTableCell align="center">
                                         {row.accountType}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="center">
-                                        {row.role}
                                     </StyledTableCell>
                                     <StyledTableCell align="left">
                                         <OptionsDialog />
