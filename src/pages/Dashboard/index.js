@@ -4,6 +4,7 @@ import CardLigDesl from "../../components/CardLigDesl";
 import CardTimeExecution from "../../components/CardTimeExecution";
 import ChartRpm from "../../components/ChartRpm";
 import Alarme from "../../components/Alarme";
+import Clock from "../../components/Clock";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Paper } from "@material-ui/core";
@@ -78,6 +79,12 @@ const Dashboard = () => {
           <Grid item xs="auto" md={4}>
             <Item>
               <Alarme />
+            </Item>
+          </Grid>
+
+          <Grid item xs="auto" md={4}>
+            <Item>
+              <Clock />
             </Item>
           </Grid>
         </Grid>
