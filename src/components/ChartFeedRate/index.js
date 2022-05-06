@@ -32,6 +32,15 @@ export default function ChartFeedRate() {
     };
 
     const options = {
+        chart: {
+            toolbar: {
+                show: true,
+                tools: {
+                    download: false,
+                    pan: false
+                }
+            }
+        },
         dataLabels: {
             enabled: false,
         },

@@ -50,7 +50,7 @@ const Dashboard = () => {
             container
             item
             spacing={4}
-            justifyContent={"center"}
+            justifyContent="center"
             rowSpacing={4}
           >
             <Grid item xs="auto" md={4}>
@@ -71,22 +71,20 @@ const Dashboard = () => {
               </Item>
             </Grid>
 
-            {/* <Grid item xs="auto" md="4">
-            <Item><ChartRpm /></Item>
-          </Grid> */}
+            <Grid item xs="auto" md={4}>
+              <Item>
+                <Alarme />
+              </Item>
+            </Grid>
+
+            <Grid item xs="auto" md={4}>
+              <Item>
+                <Clock />
+              </Item>
+            </Grid>
           </Grid>
 
-          <Grid item xs="auto" md={4}>
-            <Item>
-              <Alarme />
-            </Item>
-          </Grid>
 
-          <Grid item xs="auto" md={4}>
-            <Item>
-              <Clock />
-            </Item>
-          </Grid>
         </Grid>
       </div>
     </>

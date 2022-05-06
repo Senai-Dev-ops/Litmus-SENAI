@@ -33,6 +33,11 @@ export default function ChartTemperature() {
   };
 
   const options = {
+    chart: {
+      toolbar: {
+        show: false
+      }
+    },
     plotOptions: {
       bar: {
         borderRadius: 4,
