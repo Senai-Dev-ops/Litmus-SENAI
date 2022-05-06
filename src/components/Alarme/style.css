@@ -9,7 +9,7 @@
 }
 
 .space-alarme-check {
-  width: 100%;
+  min-width: 100%;
   margin: 0 0 1rem;
 
   display: flex;
@@ -21,6 +21,11 @@
 .space-alarme-check span.title-alarme {
   font-weight: 700;
   font-size: 1.4em;
+}
+
+.space-alarme-check .box-switch-alarme {
+  width: 70px;
+  height: 30px;
 }
 
 .box-alarmeIcon-time {
