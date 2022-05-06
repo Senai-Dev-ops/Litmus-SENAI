@@ -1,5 +1,5 @@
 import React from "react";
-import AlarmeIcon from "../../assets/images/alarm-clock.svg";
+import AlarmeIcon from "../../assets/svgs/alarm-clock.svg";
 import "./style.css";
 
 const Alarme = () => {
@@ -8,7 +8,12 @@ const Alarme = () => {
       <div className="space-alarme-check">
         <span className="title-alarme">Alarme</span>
 
-        <button>Button</button>
+        <div className="box-switch-alarme">
+          <label className="switch-lig-off">
+            <input type="checkbox" />
+            <span className="slider-lig-off" />
+          </label>
+        </div>
       </div>
 
       <div className="box-alarmeIcon-time">
