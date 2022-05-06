@@ -33,6 +33,15 @@ export default function ChartArea() {
   };
 
   const options = {
+    chart: {
+      toolbar: {
+        show: true,
+        tools: {
+            download: false,
+            pan: false
+        }
+      }
+    },
     fill: {
       type: "gradient",
       gradient: {
