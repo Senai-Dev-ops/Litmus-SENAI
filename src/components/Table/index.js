@@ -19,6 +19,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { useState } from 'react';
 import TableSearchBar from './TableSearchBar';
 import OptionsDialog from "./OptionsDialog";
+import UserInfoContext from '../../utils/Contexts/UserInfoContext';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -97,36 +98,36 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, cpf, email, accountType, role) {
-    return { name, cpf, email, accountType, role };
+function createData(name, cpf, email, accountType, birthdayDate) {
+    return { name, cpf, email, accountType, birthdayDate };
 }
 
 const rows = [
-    createData('Rhandryz João', "836.757.770-14", "rhandryz_games@email.com", "Administrador"),
-    createData('Gabriel S. B. de Hahaha', "198.051.170-57", "gabraiolaser@email.com", "Comum"),
-    createData('Jhonatan Calleri', "921.238.100-61", "calleri.mouse@email.com", "Comum"),
-    createData('Antônio João', "067.873.580-83", "antonio.lindo@email.com", "Comum"),
-    createData('Cauã Absolut Bittencourt', "050.238.620-70", "craft.e.muls@email.com", "Comum"),
-    createData('Emiliano Rigoni', "337.031.700-18", "rigoni_mil_grau@email.com", "Comum"),
-    createData('Luciano Neves', "597.085.160-40", "lulu11@email.com", "Comum"),
-    createData('Diego Costa', "267.761.220-83", "diegao.da.massa@email.com", "Comum"),
-    createData('Rogério Ceni', "021.369.210-45", "m1to_calvo@email.com", "Comum"),
-    createData('Lollipop', "121.369.910-46", "lollipop.lol@email.com", "Comum"),
-    createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum"),
-    createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum"),
-    createData('Oreo', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum"),
-    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum"),
+    createData('Rhandryz João', "836.757.770-14", "rhandryz_games@email.com", "Administrador", "2002-11-25"),
+    createData('Gabriel S. B. de Hahaha', "198.051.170-57", "gabraiolaser@email.com", "Comum", "2002-05-03"),
+    createData('Jhonatan Calleri', "921.238.100-61", "calleri.mouse@email.com", "Comum", "2002-04-05"),
+    createData('Antônio João', "067.873.580-83", "antonio.lindo@email.com", "Comum", "2003-06-21"),
+    createData('Cauã Absolut Bittencourt', "050.238.620-70", "craft.e.muls@email.com", "Comum", "2000-02-20"),
+    createData('Emiliano Rigoni', "337.031.700-18", "rigoni_mil_grau@email.com", "Comum", "1999-07-09"),
+    createData('Luciano Neves', "597.085.160-40", "lulu11@email.com", "Comum", "1992-03-07"),
+    createData('Diego Costa', "267.761.220-83", "diegao.da.massa@email.com", "Comum", "1991-08-11"),
+    createData('Rogério Ceni', "021.369.210-45", "m1to_calvo@email.com", "Comum", "1997-01-30"),
+    createData('Lollipop', "121.369.910-46", "lollipop.lol@email.com", "Comum", "1995-12-25"),
+    createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum", "1998-09-29"),
+    createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum", "2001-03-01"),
+    createData('Oreo', "723.489.321-40", "oero@email.com", "Comum", "2002-10-10"),
+    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum", "2002-10-11"),
+    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum", "2002-10-12"),
+    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum", "2002-10-13"),
+    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum", "2002-10-14"),
+    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum", "2002-10-15"),
+    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum", "2002-10-16"),
+    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum", "2002-10-17"),
+    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum", "2002-10-18"),
+    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum", "2002-10-19"),
+    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum", "2002-10-20"),
+    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum", "2002-10-21"),
+    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum", "2002-10-22"),
 ];
 
 export default function CustomTable({ rowsNumber }) {
@@ -147,7 +148,7 @@ export default function CustomTable({ rowsNumber }) {
             <Table sx={{ minWidth: 580 }} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
-                        <TableCell colSpan={8} style={{backgroundColor: "#E8EAED", padding: 2}}>
+                        <TableCell colSpan={8} style={{ backgroundColor: "#E8EAED", padding: 2 }}>
                             <TableSearchBar setSearchTerm={setSearchTerm} />
                         </TableCell>
                     </TableRow>
@@ -185,7 +186,9 @@ export default function CustomTable({ rowsNumber }) {
                                         {row.accountType}
                                     </StyledTableCell>
                                     <StyledTableCell align="left">
-                                        <OptionsDialog />
+                                        <UserInfoContext.Provider value={row}>
+                                            <OptionsDialog />
+                                        </UserInfoContext.Provider>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
@@ -199,7 +202,7 @@ export default function CustomTable({ rowsNumber }) {
                 <TableFooter>
                     <TableRow>
                         <TablePagination
-                            sx={{display: "flex", justifyContent: "flex-start", minWidth: 300}}
+                            sx={{ display: "flex", justifyContent: "flex-start", minWidth: 300 }}
                             rowsPerPageOptions={[]}
                             colSpan={6}
                             count={filterCount > 0 ? filterCount : rows.length}

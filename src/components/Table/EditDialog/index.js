@@ -9,7 +9,7 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
 
-export default function EditDialog({ open, onClose }) {
+export default function EditDialog({ open, onClose, userInfo }) {
 
   const handleClose = () => {
     onClose();
@@ -33,7 +33,7 @@ export default function EditDialog({ open, onClose }) {
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Nome</label>
-                <input type="text" />
+                <input type="text" defaultValue={userInfo.name}/>
               </div>
 
               <div className="areaInput">
@@ -46,25 +46,25 @@ export default function EditDialog({ open, onClose }) {
                   }
                 }} onBlur={(evt) => {
                   evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]+)/, "$1.$2.$3-$4")
-                }} />
+                }} defaultValue={userInfo.cpf}/>
               </div>
 
               <div className="areaInput">
                 <label>Data de nascimento</label>
-                <input type="date" />
+                <input type="date" defaultValue={userInfo.birthdayDate} />
               </div>
             </div>
 
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" />
+                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" defaultValue={userInfo.email}/>
               </div>
 
 
               <div className="areaInput">
                 <label>Tipo de conta</label>
-                <select>
+                <select defaultValue={userInfo.accountType}>
                   <option>Administrador</option>
                   <option>Comum</option>
                 </select>

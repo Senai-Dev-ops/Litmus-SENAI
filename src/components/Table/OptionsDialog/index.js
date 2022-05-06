@@ -3,10 +3,11 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import IconButton from "@mui/material/IconButton";
 import { Avatar, Menu, MenuItem } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./style.css"
 import EditDialog from "../EditDialog";
 import DeleteDialog from '../DeleteDialog';
+import UserInfoContext from '../../../utils/Contexts/UserInfoContext';
 
 export default function OptionsDialog() {
   const [anchor, setAnchor] = useState(null);
@@ -14,6 +15,8 @@ export default function OptionsDialog() {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+
+  const userInfo = useContext(UserInfoContext);
 
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
@@ -44,7 +47,7 @@ export default function OptionsDialog() {
         <MoreHorizIcon />
       </IconButton>
 
-      <EditDialog open={openEdit} onClose={handleCloseEdit} />
+      <EditDialog open={openEdit} onClose={handleCloseEdit} userInfo={userInfo}/>
       <DeleteDialog open={openDelete} onClose={handleCloseDelete} />
 
       <Menu
