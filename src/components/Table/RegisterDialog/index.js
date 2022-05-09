@@ -9,10 +9,16 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
 import "./style.css";
+import axios from "axios";
 
 
 export default function RegisterDialog() {
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCPF] = useState("");
+  const [admin, setAdmin] = useState(true);
+  const [dataNasc, setDataNasc] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,6 +27,23 @@ export default function RegisterDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function registerUser(){
+    const requestingId = localStorage.getItem("idUser");
+    const headers = {"accessToken": localStorage.getItem("accessToken")}
+    axios.post(`http://localhost:4000/user-create/${requestingId}`, {
+      name: name,
+      email: email,
+      password: "senai@115",
+      cpf: cpf,
+      adm: admin,
+      data_nasc: dataNasc
+    }, {
+      headers: headers
+    }).then((response) => {
+      console.log(response)
+    })
+  }
 
   return (
     <div>
@@ -41,7 +64,9 @@ export default function RegisterDialog() {
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Nome</label>
-                <input type="text" />
+                <input type="text" onChange={(evt) => {
+                  setName(evt.target.value)
+                }}/>
               </div>
 
               <div className="areaInput">
@@ -54,24 +79,31 @@ export default function RegisterDialog() {
                   }
                 }} onBlur={(evt) => {
                   evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]+)/, "$1.$2.$3-$4")
+                  setCPF(evt.target.value)
                 }} />
               </div>
 
               <div className="areaInput">
                 <label>Data de nascimento</label>
-                <input type="date" />
+                <input type="date" onChange={(evt) => {
+                  setDataNasc(evt.target.value)
+                }}/>
               </div>
             </div>
 
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" />
+                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" onChange={(evt) => {
+                  setEmail(evt.target.value)
+                }}/>
               </div>
 
               <div className="areaInput">
                 <label>Tipo de conta</label>
-                <select>
+                <select onChange={(evt) => {
+                    setAdmin((evt.target.value == "Comum") ? false : true)
+                  }}>
                   <option>Administrador</option>
                   <option>Comum</option>
                 </select>
@@ -89,7 +121,10 @@ export default function RegisterDialog() {
             marginBottom: "1em",
           }}
         >
-          <Button id="confirmRegisterButton" onClick={handleClose}>
+          <Button id="confirmRegisterButton" onClick={() => {
+            handleClose();
+            registerUser();
+          }}>
             Cadastrar
           </Button>
         </DialogActions>

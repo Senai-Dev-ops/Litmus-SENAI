@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
@@ -24,9 +25,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const signIn = () => {
-    // [] fazer requisição com o back para a verificação do email e senha, e o tipo de user.
-    console.log("entrou");
-    navigate("/dashboard");
+    axios.post("http://localhost:4000/login", {
+      email: email,
+      password: password
+    }).then((response) => {
+      if(!response.data.token) {
+        console.log(response.data.error)
+        return;
+      }
+
+      localStorage.setItem("accessToken", response.data.token)
+      localStorage.setItem("idUser", response.data.id)
+      navigate("/dashboard");
+    })
   };
 
   return (

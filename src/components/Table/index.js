@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import axios from "axios";
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles'
@@ -16,7 +17,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TableSearchBar from './TableSearchBar';
 import OptionsDialog from "./OptionsDialog";
 import UserInfoContext from '../../utils/Contexts/UserInfoContext';
@@ -98,42 +99,33 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, cpf, email, accountType, birthdayDate) {
-    return { name, cpf, email, accountType, birthdayDate };
+function createData(id, name, cpf, email, accountType, birthdayDate) {
+    return { id, name, cpf, email, accountType, birthdayDate };
 }
-
-const rows = [
-    createData('Rhandryz João', "836.757.770-14", "rhandryz_games@email.com", "Administrador", "2002-11-25"),
-    createData('Gabriel S. B. de Hahaha', "198.051.170-57", "gabraiolaser@email.com", "Comum", "2002-05-03"),
-    createData('Jhonatan Calleri', "921.238.100-61", "calleri.mouse@email.com", "Comum", "2002-04-05"),
-    createData('Antônio João', "067.873.580-83", "antonio.lindo@email.com", "Comum", "2003-06-21"),
-    createData('Cauã Absolut Bittencourt', "050.238.620-70", "craft.e.muls@email.com", "Comum", "2000-02-20"),
-    createData('Emiliano Rigoni', "337.031.700-18", "rigoni_mil_grau@email.com", "Comum", "1999-07-09"),
-    createData('Luciano Neves', "597.085.160-40", "lulu11@email.com", "Comum", "1992-03-07"),
-    createData('Diego Costa', "267.761.220-83", "diegao.da.massa@email.com", "Comum", "1991-08-11"),
-    createData('Rogério Ceni', "021.369.210-45", "m1to_calvo@email.com", "Comum", "1997-01-30"),
-    createData('Lollipop', "121.369.910-46", "lollipop.lol@email.com", "Comum", "1995-12-25"),
-    createData('Marshmallow', "021.580.215-49", "marshmallow@email.com", "Comum", "1998-09-29"),
-    createData('Nougat', "836.362.170-45", "nouggets@email.com", "Comum", "2001-03-01"),
-    createData('Oreo', "723.489.321-40", "oero@email.com", "Comum", "2002-10-10"),
-    createData('Oreo1', "723.489.321-40", "oero@email.com", "Comum", "2002-10-11"),
-    createData('Oreo2', "723.489.321-40", "oero@email.com", "Comum", "2002-10-12"),
-    createData('Oreo3', "723.489.321-40", "oero@email.com", "Comum", "2002-10-13"),
-    createData('Oreo4', "723.489.321-40", "oero@email.com", "Comum", "2002-10-14"),
-    createData('Oreo5', "723.489.321-40", "oero@email.com", "Comum", "2002-10-15"),
-    createData('Oreo6', "723.489.321-40", "oero@email.com", "Comum", "2002-10-16"),
-    createData('Oreo7', "723.489.321-40", "oero@email.com", "Comum", "2002-10-17"),
-    createData('Oreo8', "723.489.321-40", "oero@email.com", "Comum", "2002-10-18"),
-    createData('Oreo9', "723.489.321-40", "oero@email.com", "Comum", "2002-10-19"),
-    createData('Oreo10', "723.489.321-40", "oero@email.com", "Comum", "2002-10-20"),
-    createData('Oreo11', "723.489.321-40", "oero@email.com", "Comum", "2002-10-21"),
-    createData('Oreo12', "723.489.321-40", "oero@email.com", "Comum", "2002-10-22"),
-];
 
 export default function CustomTable({ rowsNumber }) {
     const [page, setPage] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
+    const [rows, setRows] = useState([]);
     var filterCount = 0
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/user-list")
+        .then((response) => {
+            for(var x in response.data.users){
+                setRows((arr) => [
+                    ...arr,
+                    createData(
+                    response.data.users[x].id,
+                    response.data.users[x].name,
+                    response.data.users[x].cpf,
+                    response.data.users[x].email,
+                    response.data.users[x].adm ? "Administrador":"Comum",
+                    response.data.users[x].data_nasc)
+                ])
+            }
+        })
+    }, [])
 
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsNumber - rows.length) : 0;
@@ -172,7 +164,7 @@ export default function CustomTable({ rowsNumber }) {
                                 }
                             }).slice(page * rowsNumber, page * rowsNumber + rowsNumber))
                             .map((row) => (
-                                <StyledTableRow key={row.name}>
+                                <StyledTableRow key={row.id}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
