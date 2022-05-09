@@ -12,6 +12,8 @@ import ChartFeedRate from "../../components/ChartFeedRate";
 import ChartTemperature from "../../components/ChartTemperature";
 import ChartArea from "../../components/ChartArea";
 
+import "./style.css";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#F4F4F4",
   padding: theme.spacing(1),
@@ -24,8 +26,42 @@ const Dashboard = () => {
     <>
       <Header titleHeader="Dashboard" />
 
-      <div style={{ padding: 30 }}>
-        <Grid container spacing={4} rowSpacing={4}>
+      <main style={{ padding: 20 }}>
+        <div className="container-cards-dash">
+          <div className="box-card">
+            <CardLigDesl />
+          </div>
+
+          <div className="box-card">
+            <CardTimeExecution />
+          </div>
+
+          <div className="box-card">
+            <Alarme />
+          </div>
+        </div>
+
+        <div></div>
+
+        <div></div>
+
+        <div>
+          <Clock />
+        </div>
+
+        <div>
+          <ChartFeedRate />
+        </div>
+
+        <div>
+          <ChartTemperature />
+        </div>
+
+        <div>
+          <ChartArea />
+        </div>
+
+        {/* <Grid container spacing={4} rowSpacing={4}>
           <Grid
             container
             item
@@ -83,8 +119,8 @@ const Dashboard = () => {
               </Item>
             </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </Grid> */}
+      </main>
     </>
   );
 };
