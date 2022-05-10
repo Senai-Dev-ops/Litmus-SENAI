@@ -5,8 +5,21 @@ import Dashboard from "./pages/Dashboard";
 import TesteDash from "./pages/Dashboard/Teste";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
+import axios from "axios";
+
+var response = {};
 
 const userAuth = () => {
+  axios.get('http://localhost:4000/auth', {headers: {"accessToken": localStorage.getItem("accessToken")}})
+  .then((res) => {
+    response = res.data;
+  })
+
+  if(response.error){
+    console.log("Entrou no erro")
+    return false;
+  }
+
   return true;
 };
 
@@ -28,6 +41,7 @@ const PrivateRouteAdmin = ({ children }) => {
 
 const PrivateRouteUser = ({ children }) => {
   const auth = userAuth();
+  
   return auth ? (
     children
   ) : (
@@ -46,7 +60,7 @@ const Router = () => {
           path="/dashboard"
           element={
             <PrivateRouteUser>
-              <TesteDash />
+              <Dashboard />
             </PrivateRouteUser>
           }
         />
