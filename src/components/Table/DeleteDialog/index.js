@@ -8,12 +8,22 @@ import {
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
+import axios from "axios";
 
-export default function DeleteDialog({ open, onClose }) {
+export default function DeleteDialog({ open, onClose, userInfo }) {
 
     const handleClose = () => {
         onClose();
     };
+
+    function deleteUser() {
+        const requestingId = localStorage.getItem("idUser");
+        const headers = { "accessToken": localStorage.getItem("accessToken") }
+        axios.post(`http://localhost:4000/delete-user/${requestingId}/${userInfo.id}`, {}, { headers: headers })
+        .then((response) => {
+            console.log(response)
+        })
+    }
 
     return (
         <div>
@@ -39,7 +49,10 @@ export default function DeleteDialog({ open, onClose }) {
                     }}
                 >
                     <Button id="cancelDeleteButton" onClick={handleClose}>Cancelar</Button>
-                    <Button id="confirmDeleteButton" onClick={handleClose}>Confirmar</Button>
+                    <Button id="confirmDeleteButton" onClick={() => {
+                        deleteUser()
+                        handleClose()
+                    }}>Confirmar</Button>
                 </DialogActions>
             </Dialog>
         </div>

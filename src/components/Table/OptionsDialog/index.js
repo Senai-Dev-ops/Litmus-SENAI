@@ -48,7 +48,7 @@ export default function OptionsDialog() {
       </IconButton>
 
       <EditDialog open={openEdit} onClose={handleCloseEdit} userInfo={userInfo}/>
-      <DeleteDialog open={openDelete} onClose={handleCloseDelete} />
+      <DeleteDialog open={openDelete} onClose={handleCloseDelete} userInfo={userInfo} />
 
       <Menu
         anchorEl={anchor}
