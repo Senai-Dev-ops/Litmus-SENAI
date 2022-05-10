@@ -99,6 +99,8 @@ const Header = ({ titleHeader }) => {
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("idUser");
                     Navigate("/");
                   }}
                 >
