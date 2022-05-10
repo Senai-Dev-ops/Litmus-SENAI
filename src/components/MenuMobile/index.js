@@ -73,7 +73,11 @@ export default function MenuMobile({ pageName, user, typeUser }) {
 							</ListItemIcon>
 							<ListItemText primary="Gerenciar Usuários" />
 						</ListItem>
-						<ListItem button onClick={() => navigate("/dashboard")}>
+						<ListItem button onClick={() => {
+							localStorage.removeItem("accessToken");
+							localStorage.removeItem("idUser");
+							navigate("/dashboard")
+						}}>
 							<ListItemIcon>
 								<InsightsIcon />
 							</ListItemIcon>
