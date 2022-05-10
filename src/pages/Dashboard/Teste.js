@@ -8,6 +8,7 @@ import ChartFeedRate from "../../components/ChartFeedRate";
 import ChartTemperature from "../../components/ChartTemperature";
 import ChartArea from "../../components/ChartArea";
 import "./style.css";
+import "./responsive.css";
 
 const Dashboard = () => {
 	return (
@@ -16,19 +17,19 @@ const Dashboard = () => {
 
 			<main style={{ padding: 20 }}>
 				<div className="container-cards-dash">
-					<div className="box-card" style={{ width: "20%" }}>
+					<div className="box-card status">
 						<CardLigDesl />
 					</div>
 
-					<div className="box-card" style={{ width: "22%" }}>
+					<div className="box-card execution">
 						<CardTimeExecution />
 					</div>
 
-					<div className="box-card" style={{ width: "26%" }}>
+					<div className="box-card alarme">
 						<Alarme />
 					</div>
 
-					<div className="box-card" style={{ flex: 1 }}>
+					<div className="box-card clock">
 						<Clock />
 					</div>
 				</div>
