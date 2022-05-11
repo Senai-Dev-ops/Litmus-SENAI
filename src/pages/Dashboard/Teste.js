@@ -32,19 +32,21 @@ const Dashboard = () => {
 					<div className="box-card clock">
 						<Clock />
 					</div>
+
+					<div className="box-chart feedChart">
+						<ChartFeedRate />
+					</div>
 				</div>
 
-				<div className="box-card">
-					<ChartFeedRate />
-				</div>
+				
 
-				<div className="box-card">
+				{/* <div className="box-card">
 					<ChartTemperature />
 				</div>
 
 				<div className="box-card">
 					<ChartArea />
-				</div>
+				</div> */}
 			</main>
 		</>
 	);

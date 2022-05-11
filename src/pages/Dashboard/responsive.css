@@ -33,15 +33,23 @@
 		flex: 1;
 	}
 	.box-card.clock {
-		width: 30%;
-		flex: none;
+		height: 377px;
+		width: auto;
+		flex: 1;
 	}
+	
 }
 
 @media screen and (max-width: 1063px) {
 	.content-clock .clock {
 		font-size: 3.6em;
 		font-weight: 700;
+	}
+}
+
+@media screen and (max-width: 952px) {
+	.box-card.clock {
+		height: 230px;
 	}
 }
 
@@ -58,6 +66,7 @@
 		flex: none;
 	}
 	.box-card.clock {
+		height: 230px;
 		width: auto;
 		flex: 1;
 	}
@@ -143,4 +152,10 @@
 		font-weight: 700;
 	}
 	
+}
+
+@media screen and (min-width: 1373px) {
+	.box-chart.feedChart {
+		display: none;
+	}
 }

@@ -1,4 +1,5 @@
 import Chart from "react-apexcharts";
+import './style.css'
 
 export default function ChartFeedRate() {
     const mockData = {
@@ -24,9 +25,7 @@ export default function ChartFeedRate() {
         series: [
             {
                 name: "mm / min",
-                data: [
-                    2.13, 1.23, 0.33, 0.61, , 0.82, 1.54, 3.54, 4.98, 4.32, 3.21,
-                    2.79, 3.02, 4, 4.76,],
+                data: [ 2.13, 1.23, 0.33, 0.61, 0.82, 1.54, 3.54, 4.98, 4.32, 3.21, 2.79, 3.02, 4, 4.76,],
             },
         ],
     };
@@ -54,7 +53,7 @@ export default function ChartFeedRate() {
     };
 
     return (
-        <>
+        <div className="container-chart">
             <h2 style={{fontFamily: "Nunito"}}>Velocidade de avanço</h2>
             <Chart
                 options={{ ...options }}
@@ -62,6 +61,6 @@ export default function ChartFeedRate() {
                 height="300"
                 series={mockData.series}
             />
-        </>
+        </div>
     );
 }
