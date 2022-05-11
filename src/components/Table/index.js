@@ -99,8 +99,8 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(id, name, cpf, email, accountType, birthdayDate) {
-    return { id, name, cpf, email, accountType, birthdayDate };
+function createData(idUsuario, name, cpf, email, accountType, birthdayDate) {
+    return { idUsuario, name, cpf, email, accountType, birthdayDate };
 }
 
 export default function CustomTable({ rowsNumber }) {
@@ -116,12 +116,12 @@ export default function CustomTable({ rowsNumber }) {
                 setRows((arr) => [
                     ...arr,
                     createData(
-                    response.data.users[x].id,
-                    response.data.users[x].name,
-                    response.data.users[x].cpf,
+                    response.data.users[x].idUsuario,
+                    response.data.users[x].nome,
+                    response.data.users[x].CPF,
                     response.data.users[x].email,
-                    response.data.users[x].adm ? "Administrador":"Comum",
-                    response.data.users[x].data_nasc)
+                    response.data.users[x].ADM ? "Administrador":"Comum",
+                    response.data.users[x].DATANASC)
                 ])
             }
         })
@@ -164,7 +164,7 @@ export default function CustomTable({ rowsNumber }) {
                                 }
                             }).slice(page * rowsNumber, page * rowsNumber + rowsNumber))
                             .map((row) => (
-                                <StyledTableRow key={row.id}>
+                                <StyledTableRow key={row.idUsuario}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
