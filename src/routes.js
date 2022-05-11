@@ -60,7 +60,7 @@ const Router = () => {
           path="/dashboard"
           element={
             <PrivateRouteUser>
-              <Dashboard />
+              <TesteDash />
             </PrivateRouteUser>
           }
         />
