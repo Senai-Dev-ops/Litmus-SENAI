@@ -32,12 +32,12 @@ export default function RegisterDialog() {
     const requestingId = localStorage.getItem("idUser");
     const headers = {"accessToken": localStorage.getItem("accessToken")}
     axios.post(`http://localhost:4000/user-create/${requestingId}`, {
-      name: name,
+      nome: name,
       email: email,
-      password: "senai@115",
-      cpf: cpf,
-      adm: admin,
-      data_nasc: dataNasc
+      senha: "senai@115",
+      CPF: cpf,
+      ADM: admin,
+      DATANASC: dataNasc
     }, {
       headers: headers
     }).then((response) => {

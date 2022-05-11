@@ -7,7 +7,7 @@ import Admin from "./pages/Admin";
 import Error from "./pages/Error";
 import axios from "axios";
 
-var response = {};
+var response = {ADM: false};
 
 const userAuth = () => {
   axios.get('http://localhost:4000/auth', {headers: {"accessToken": localStorage.getItem("accessToken")}})
@@ -25,18 +25,13 @@ const userAuth = () => {
 
 const PrivateRouteAdmin = ({ children }) => {
   const auth = userAuth();
-  const userComum = true;
+  const userComum = response.ADM;
 
-  return auth ? (
-    children
-  ) : userComum ? (
-    <Error
-      error="Acesso restrito"
-      text="Você não tem permissão para acessar esta página."
-    />
-  ) : (
-    <Error error="Acesso restrito" text="Faça login para acessar a página" />
-  );
+  return auth ? 
+  (userComum ?
+     children :
+     <Error error="Acesso restrito" text="Você não tem permissão para acessar esta página." />)
+  : <Error error="Acesso restrito" text="Faça login para acessar a página" />
 };
 
 const PrivateRouteUser = ({ children }) => {
@@ -60,7 +55,7 @@ const Router = () => {
           path="/dashboard"
           element={
             <PrivateRouteUser>
-              <TesteDash />
+              <TesteDash  />
             </PrivateRouteUser>
           }
         />

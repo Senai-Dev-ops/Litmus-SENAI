@@ -27,7 +27,7 @@ const Login = () => {
   const signIn = () => {
     axios.post("http://localhost:4000/login", {
       email: email,
-      password: password
+      senha: password
     }).then((response) => {
       if(!response.data.token) {
         console.log(response.data.error)
@@ -35,7 +35,7 @@ const Login = () => {
       }
 
       localStorage.setItem("accessToken", response.data.token)
-      localStorage.setItem("idUser", response.data.id)
+      localStorage.setItem("idUser", response.data.idUsuario)
       navigate("/dashboard");
     })
   };

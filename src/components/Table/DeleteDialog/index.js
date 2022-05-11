@@ -19,7 +19,7 @@ export default function DeleteDialog({ open, onClose, userInfo }) {
     function deleteUser() {
         const requestingId = localStorage.getItem("idUser");
         const headers = { "accessToken": localStorage.getItem("accessToken") }
-        axios.delete(`http://localhost:4000/delete-user/${requestingId}/${userInfo.id}`, { headers: headers })
+        axios.delete(`http://localhost:4000/delete-user/${requestingId}/${userInfo.idUsuario}`, { headers: headers })
         .then((response) => {
             console.log(response)
         })
