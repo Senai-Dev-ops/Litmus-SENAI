@@ -1,4 +1,4 @@
-@media screen and (max-width: 1372px) {
+/* @media screen and (max-width: 1372px) {
 	.container-cards-dash {
 		flex-wrap: wrap;
 	}
@@ -15,11 +15,12 @@
 	.box-card.clock {
 		flex: 1;
 	}
-}
+} */
 
 @media screen and (max-width: 1372px) {
 	.container-cards-dash {
 		justify-content: flex-start;
+		flex-wrap: wrap;
 	}
 
 	.box-card.status {
@@ -37,7 +38,15 @@
 		width: auto;
 		flex: 1;
 	}
-	
+
+	.content-clock .clock {
+		font-size: 4.6em;
+		font-weight: 700;
+	}
+	.content-clock .date {
+		font-size: 1.8em;
+		font-weight: 500;
+	}
 }
 
 @media screen and (max-width: 1063px) {
@@ -48,12 +57,6 @@
 }
 
 @media screen and (max-width: 952px) {
-	.box-card.clock {
-		height: 230px;
-	}
-}
-
-@media screen and (max-width: 867px) {
 	.box-card.status {
 		width: 55%;
 	}
@@ -69,6 +72,18 @@
 		height: 230px;
 		width: auto;
 		flex: 1;
+	}
+	.box-chart.feedChart-cards {
+		display: none;
+	}
+	.box-chart.feedChart {
+		display: flex;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	section.container-charts-dash .two-charts {
+		flex-wrap: wrap;
 	}
 }
 
@@ -94,19 +109,18 @@
 		font-weight: 600;
 		font-size: 1.1em;
 	}
-	
 }
 
 @media screen and (max-width: 512px) {
 	.box-card.alarme {
-		width: 100%
+		width: 100%;
 	}
 
 	.space-alarme-check span.title-alarme {
 		font-weight: 700;
 		font-size: 1.4em;
 	}
-	
+
 	.space-alarme-check .box-switch-alarme {
 		width: 70px;
 		height: 30px;
@@ -119,9 +133,7 @@
 		font-weight: 600;
 		font-size: 1.3em;
 	}
-	
 }
-
 
 @media screen and (max-width: 320px) {
 	.box-switch-lig-off {
@@ -151,11 +163,13 @@
 		font-size: 3.2em;
 		font-weight: 700;
 	}
-	
 }
 
 @media screen and (min-width: 1373px) {
-	.box-chart.feedChart {
+	.box-chart.feedChart-cards {
 		display: none;
+	}
+	.box-chart.feedChart {
+		display: flex;
 	}
 }

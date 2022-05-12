@@ -2,90 +2,59 @@ import React from "react";
 import Header from "../../components/Header";
 import CardLigDesl from "../../components/CardLigDesl";
 import CardTimeExecution from "../../components/CardTimeExecution";
-import ChartRpm from "../../components/ChartRpm";
 import Alarme from "../../components/Alarme";
 import Clock from "../../components/Clock";
-import { Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Paper } from "@material-ui/core";
 import ChartFeedRate from "../../components/ChartFeedRate";
 import ChartTemperature from "../../components/ChartTemperature";
 import ChartArea from "../../components/ChartArea";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#F4F4F4",
-  padding: theme.spacing(1),
-  borderRadius: 10,
-  filter: "drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.25))",
-}));
+import "./style.css";
+import "./responsive.css";
 
 const Dashboard = () => {
-  return (
-    <>
-      <Header titleHeader="Dashboard" />
+	return (
+		<>
+			<Header titleHeader="Dashboard" />
 
-      <div style={{ padding: 30 }}>
-        <Grid container spacing={4} rowSpacing={4}>
-          <Grid
-            container
-            item
-            justifyContent={"center"}
-            spacing={4}
-            rowSpacing={4}
-          >
-            <Grid item xs="auto">
-              <Item>
-                <CardLigDesl />
-              </Item>
-            </Grid>
+			<main>
+				<section className="container-cards-dash">
+					<div className="box-card status">
+						<CardLigDesl />
+					</div>
 
-            <Grid item xs="auto">
-              <Item>
-                <CardTimeExecution />
-              </Item>
-            </Grid>
+					<div className="box-card execution">
+						<CardTimeExecution />
+					</div>
 
-            <Grid item xs="auto" md={4}>
-              <Item>
-                <Alarme />
-              </Item>
-            </Grid>
+					<div className="box-card alarme">
+						<Alarme />
+					</div>
 
-            <Grid item xs="auto" md={4}>
-              <Item>
-                <Clock />
-              </Item>
-            </Grid>
-          </Grid>
+					<div className="box-card clock">
+						<Clock />
+					</div>
 
-          <Grid
-            container
-            item
-            spacing={4}
-            justifyContent="center"
-            rowSpacing={4}
-          >
-            <Grid item xs="auto" md={4}>
-              <Item>
-                <ChartFeedRate />
-              </Item>
-            </Grid>
+					<div className="box-chart feedChart-cards">
+						<ChartFeedRate />
+					</div>
+				</section>
 
-            <Grid item xs="auto" md={4}>
-              <Item>
-                <ChartTemperature />
-              </Item>
-            </Grid>
+				<section className="container-charts-dash">
+					<div className="box-chart feedChart">
+						<ChartFeedRate />
+					</div>
 
-            <Grid item xs="auto" md={4}>
-              <Item>
-                <ChartArea />
-              </Item>
-            </Grid>
-          </Grid>
-        </Grid>
-      </div>
-    </>
-  );
+					<div className="two-charts">
+						<div className="box-chart temperature">
+							<ChartTemperature />
+						</div>
+
+						<div className="box-chart rotationMin">
+							<ChartArea />
+						</div>
+					</div>
+				</section>
+			</main>
+		</>
+	);
 };
 export default Dashboard;
