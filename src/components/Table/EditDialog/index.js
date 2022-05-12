@@ -33,10 +33,11 @@ export default function EditDialog({ open, onClose, userInfo }) {
       nome: (name === "") ? userInfo.nome : name,
       email: (email === "") ? userInfo.email : email,
       CPF: (cpf === "") ? userInfo.CPF : cpf,
-      ADM: (userInfo.ADM === "Administrador") ? true : false,
+      ADM: (userInfo.accountType === "Administrador") ? true : false,
       DATANASC: (dataNasc === "") ? userInfo.DATANASC : dataNasc
     }, headers)
 
+    console.log(userInfo)
     console.log(response)
   }
 
@@ -97,7 +98,7 @@ export default function EditDialog({ open, onClose, userInfo }) {
               <div className="areaInput">
                 <label>Tipo de conta</label>
                 <select defaultValue={userInfo.accountType} onChange={(evt) => {
-                    userInfo.ADM = evt.target.value
+                    userInfo.accountType = evt.target.value
                     setAdmin((evt.target.value == "Comum") ? false : true)
                   }}>
                   <option>Administrador</option>
