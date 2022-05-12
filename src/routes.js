@@ -8,20 +8,16 @@ import Error from "./pages/Error";
 import Service from "./services";
 const srv = new Service();
 
-var response = { ADM: false };
-
 const userAuth = srv.validToken;
 
 const PrivateRouteAdmin = ({ children }) => {
   const auth = userAuth(localStorage.getItem("token"), () => {}).then(
     (res) => res
   );
-  const userComum = response.ADM;
+  const userAdm = localStorage.getItem("adm") == 0 ? false : true;
 
   return auth ? (
-    userComum ? (
-      children
-    ) : (
+    userAdm ? (children) : (
       <Error
         error="Acesso restrito"
         text="Você não tem permissão para acessar esta página."

@@ -21,6 +21,9 @@ import { useEffect, useState } from 'react';
 import TableSearchBar from './TableSearchBar';
 import OptionsDialog from "./OptionsDialog";
 import UserInfoContext from '../../utils/Contexts/UserInfoContext';
+import Service from '../../services';
+
+const srv = new Service();
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -110,9 +113,9 @@ export default function CustomTable({ rowsNumber }) {
     var filterCount = 0
 
     useEffect(() => {
-        axios.get("http://localhost:4000/user-list")
+        axios.get(`${srv.getBaseURL()}/user-list`)
         .then((response) => {
-            for(var x in response.data.users){
+            for(const x in response.data.users){
                 setRows((arr) => [
                     ...arr,
                     createData(
@@ -121,7 +124,7 @@ export default function CustomTable({ rowsNumber }) {
                     response.data.users[x].CPF,
                     response.data.users[x].email,
                     response.data.users[x].ADM ? "Administrador":"Comum",
-                    response.data.users[x].DATANASC)
+                    response.data.users[x].DATANASC.split("T")[0])
                 ])
             }
         })
@@ -154,7 +157,7 @@ export default function CustomTable({ rowsNumber }) {
                 </TableHead>
                 <TableBody>
                     {
-                        (searchTerm.trim() == "" ?
+                        (searchTerm.trim() === "" ?
                             (rowsNumber > 0 ? rows.slice(page * rowsNumber, page * rowsNumber + rowsNumber) : rows)
                             :
                             rows.filter((row) => {
@@ -202,7 +205,7 @@ export default function CustomTable({ rowsNumber }) {
                             page={page}
                             labelDisplayedRows={
                                 ({ from, to, count }) => {
-                                    if (searchTerm != "") {
+                                    if (searchTerm !== "") {
                                         return (page + 1) + ' de ' + Math.max(0, Math.ceil(filterCount / rowsNumber))
                                     }
                                     return (page + 1) + ' de ' + Math.max(0, Math.ceil(count / rowsNumber))

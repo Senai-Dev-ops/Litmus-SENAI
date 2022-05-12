@@ -9,8 +9,9 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
 import "./style.css";
-import axios from "axios";
+import Service from "../../../services";
 
+const srv = new Service();
 
 export default function RegisterDialog() {
   const [open, setOpen] = useState(false);
@@ -28,21 +29,20 @@ export default function RegisterDialog() {
     setOpen(false);
   };
 
-  function registerUser(){
+  async function registerUser(){
     const requestingId = localStorage.getItem("idUser");
-    const headers = {"accessToken": localStorage.getItem("accessToken")}
-    axios.post(`http://localhost:4000/user-create/${requestingId}`, {
+    const headers = {"accessToken": localStorage.getItem("token")}
+
+    const response = await srv.registerUser(requestingId, {
       nome: name,
       email: email,
       senha: "senai@115",
       CPF: cpf,
       ADM: admin,
       DATANASC: dataNasc
-    }, {
-      headers: headers
-    }).then((response) => {
-      console.log(response)
-    })
+    }, headers)
+
+    console.log(response);
   }
 
   return (
@@ -71,7 +71,7 @@ export default function RegisterDialog() {
 
               <div className="areaInput">
                 <label>CPF</label>
-                <input type="text" pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}" maxLength="14" onKeyPress={(evt) => {
+                <input type="text" maxLength="14" onKeyPress={(evt) => {
                   var key = (evt.which) ? evt.which : evt.keyCode
 
                   if (key > 31 && (key < 48 || key > 57)) {
@@ -94,7 +94,7 @@ export default function RegisterDialog() {
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" onChange={(evt) => {
+                <input type="email" onChange={(evt) => {
                   setEmail(evt.target.value)
                 }}/>
               </div>

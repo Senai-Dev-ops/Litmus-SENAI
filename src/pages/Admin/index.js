@@ -6,7 +6,7 @@ import "./style.css";
 const Admin = () => {
   return (
     <div>
-      <Header titleHeader="Gerenciamento" />
+      <Header titleHeader="Gerenciamento" userName={localStorage.getItem("user")}/>
 
       <div className="containerTable">
         <div

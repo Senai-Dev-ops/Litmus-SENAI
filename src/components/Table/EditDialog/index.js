@@ -8,12 +8,37 @@ import {
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
+import Service from "../../../services";
+import { useState } from "react";
+
+const srv = new Service();
 
 export default function EditDialog({ open, onClose, userInfo }) {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCPF] = useState("");
+  const [admin, setAdmin] = useState(true);
+  const [dataNasc, setDataNasc] = useState("");
 
   const handleClose = () => {
     onClose();
   };
+
+  async function editUser() {
+    const requestingId = localStorage.getItem("idUser");
+    const headers = { "accessToken": localStorage.getItem("token") }
+    
+    const response = srv.editUser(requestingId, userInfo.idUsuario, {
+      nome: (name === "") ? userInfo.nome : name,
+      email: (email === "") ? userInfo.email : email,
+      CPF: (cpf === "") ? userInfo.CPF : cpf,
+      ADM: (userInfo.ADM === "Administrador") ? true : false,
+      DATANASC: (dataNasc === "") ? userInfo.DATANASC : dataNasc
+    }, headers)
+
+    console.log(response)
+  }
 
   return (
     <div>
@@ -33,12 +58,14 @@ export default function EditDialog({ open, onClose, userInfo }) {
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Nome</label>
-                <input type="text" defaultValue={userInfo.name}/>
+                <input type="text" defaultValue={userInfo.name} onChange={(evt) => {
+                  setName(evt.target.value)
+                }}/>
               </div>
 
               <div className="areaInput">
                 <label>CPF</label>
-                <input type="text" pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}" maxLength="14" onKeyPress={(evt) => {
+                <input type="text" maxLength="14" onKeyPress={(evt) => {
                   var key = (evt.which) ? evt.which : evt.keyCode
 
                   if (key > 31 && (key < 48 || key > 57)) {
@@ -46,25 +73,33 @@ export default function EditDialog({ open, onClose, userInfo }) {
                   }
                 }} onBlur={(evt) => {
                   evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]+)/, "$1.$2.$3-$4")
+                  setCPF(evt.target.value)
                 }} defaultValue={userInfo.cpf}/>
               </div>
 
               <div className="areaInput">
                 <label>Data de nascimento</label>
-                <input type="date" defaultValue={userInfo.birthdayDate} />
+                <input type="date" defaultValue={userInfo.birthdayDate} onChange={(evt) => {
+                  setDataNasc(evt.target.value)
+                }}/>
               </div>
             </div>
 
             <div className="containerInputs">
               <div className="areaInput">
                 <label>Email</label>
-                <input type="email" pattern="[a-z0-9].+\@[a-z]+\.[a-z]+(\.[a-z]+)?" defaultValue={userInfo.email}/>
+                <input type="email" defaultValue={userInfo.email} onChange={(evt) => {
+                  setEmail(evt.target.value)
+                }}/>
               </div>
 
 
               <div className="areaInput">
                 <label>Tipo de conta</label>
-                <select defaultValue={userInfo.accountType}>
+                <select defaultValue={userInfo.accountType} onChange={(evt) => {
+                    userInfo.ADM = evt.target.value
+                    setAdmin((evt.target.value == "Comum") ? false : true)
+                  }}>
                   <option>Administrador</option>
                   <option>Comum</option>
                 </select>
@@ -81,7 +116,10 @@ export default function EditDialog({ open, onClose, userInfo }) {
             marginBottom: "1em",
           }}
         >
-          <Button id="confirmEditButton" onClick={handleClose}>
+          <Button id="confirmEditButton" onClick={() => {
+            editUser()
+            handleClose()
+          }}>
             Editar
           </Button>
         </DialogActions>

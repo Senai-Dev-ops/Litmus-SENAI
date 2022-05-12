@@ -8,7 +8,9 @@ import {
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
-import axios from "axios";
+import Service from "../../../services";
+
+const srv = new Service();
 
 export default function DeleteDialog({ open, onClose, userInfo }) {
 
@@ -16,13 +18,12 @@ export default function DeleteDialog({ open, onClose, userInfo }) {
         onClose();
     };
 
-    function deleteUser() {
+    async function deleteUser() {
         const requestingId = localStorage.getItem("idUser");
-        const headers = { "accessToken": localStorage.getItem("accessToken") }
-        axios.delete(`http://localhost:4000/delete-user/${requestingId}/${userInfo.idUsuario}`, { headers: headers })
-        .then((response) => {
-            console.log(response)
-        })
+        const headers = { "accessToken": localStorage.getItem("token") }
+
+        const response = await srv.deleteUser(requestingId, userInfo.idUsuario, headers);
+        console.log(response);
     }
 
     return (
