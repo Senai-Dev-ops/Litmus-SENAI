@@ -4,82 +4,73 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
-import axios from "axios";
+
+import Service from "./services";
+const srv = new Service();
 
 var response = { ADM: false };
 
-const userAuth = () => {
-	axios
-		.get("http://localhost:4000/auth", {
-			headers: { accessToken: localStorage.getItem("accessToken") },
-		})
-		.then((res) => {
-			response = res.data;
-		});
-
-	if (response.error) {
-		console.log("Entrou no erro");
-		return false;
-	}
-
-	return true;
-};
+const userAuth = srv.validToken;
 
 const PrivateRouteAdmin = ({ children }) => {
-	const auth = userAuth();
-	const userComum = response.ADM;
+  const auth = userAuth(localStorage.getItem("token"), () => {}).then(
+    (res) => res
+  );
+  const userComum = response.ADM;
 
-	return auth ? (
-		userComum ? (
-			children
-		) : (
-			<Error
-				error="Acesso restrito"
-				text="Você não tem permissão para acessar esta página."
-			/>
-		)
-	) : (
-		<Error error="Acesso restrito" text="Faça login para acessar a página" />
-	);
+  return auth ? (
+    userComum ? (
+      children
+    ) : (
+      <Error
+        error="Acesso restrito"
+        text="Você não tem permissão para acessar esta página."
+      />
+    )
+  ) : (
+    <Error error="Acesso restrito" text="Faça login para acessar a página" />
+  );
 };
 
 const PrivateRouteUser = ({ children }) => {
-	const auth = userAuth();
+  const auth = userAuth(localStorage.getItem("token"), () => {}).then(
+    (res) => res
+  );
 
-	return auth ? (
-		children
-	) : (
-		<Error error="Acesso restrito" text="Faça login para acessar a página" />
-	);
+  return auth ? (
+    children
+  ) : (
+    <Error error="Acesso restrito" text="Faça login para acessar a página" />
+  );
 };
 
 const Router = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/*" element={<Error typeError="code" />} />
-				<Route path="/" element={<Login />} />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<Error typeError="code" />} />
+        <Route path="/" element={<Login />} />
 
-				<Route
-					path="/dashboard"
-					element={
-						<PrivateRouteUser>
-							<Dashboard />
-						</PrivateRouteUser>
-					}
-				/>
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRouteUser>
+              <Dashboard />
+            </PrivateRouteUser>
+          }
+        />
 
-				<Route
-					path="/admin"
-					element={
-						<PrivateRouteAdmin>
-							<Admin />
-						</PrivateRouteAdmin>
-					}
-				/>
-			</Routes>
-		</BrowserRouter>
-	);
+        <Route
+          path="/admin"
+          element={
+            <PrivateRouteAdmin>
+              <Admin />
+            </PrivateRouteAdmin>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;

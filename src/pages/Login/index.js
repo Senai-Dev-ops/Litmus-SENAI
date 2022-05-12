@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +7,11 @@ import ChangeColors from "../../utils/Login/ChangeColors";
 import LogoSenai from "../../assets/svgs/LogoSenai.svg";
 import "./style.css";
 import ForgotPassword from "../../components/ForgotPassword";
+
+import Alert from "../../components/Alert";
+
+import Service from "../../services";
+const srv = new Service();
 
 const Login = () => {
   const changeColors = ChangeColors();
@@ -24,24 +28,41 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = () => {
-    axios.post("http://localhost:4000/login", {
-      email: email,
-      senha: password
-    }).then((response) => {
-      if(!response.data.token) {
-        console.log(response.data.error)
-        return;
-      }
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
 
-      localStorage.setItem("accessToken", response.data.token)
-      localStorage.setItem("idUser", response.data.idUsuario)
+  const login = async () => {
+    try {
+      const body = {
+        email: email.trim(),
+        senha: password.trim(),
+      };
+
+      const response = await srv.login(body);
+
+      localStorage.setItem("adm", response.ADM);
+      localStorage.setItem("user", response.nome);
+      localStorage.setItem("token", response.token);
+
       navigate("/dashboard");
-    })
+    } catch (err) {
+      setTitle("Não foi possível fazer o login");
+      setDescription("Verifique suas credências e tente novamente, por favor!");
+
+      setOpen(true);
+    }
   };
 
   return (
     <main className="login">
+      <Alert
+        open={open}
+        setOpen={setOpen}
+        title={title}
+        description={description}
+      />
+
       <section className="bg-image"></section>
 
       <section className="container-form">
@@ -58,7 +79,7 @@ const Login = () => {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                signIn();
+                login();
               }}
             >
               <div className="title">

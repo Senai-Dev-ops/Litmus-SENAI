@@ -14,8 +14,8 @@ import "./style.css";
 import MenuMobile from "../MenuMobile";
 import PdfGenerator from "../PdfGenerator";
 
-const Header = ({ titleHeader }) => {
-  const username = "James Ferreira";
+const Header = ({ titleHeader, userName }) => {
+  const username = userName || "James Ferreira";
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const userAdmin = true;
@@ -26,6 +26,11 @@ const Header = ({ titleHeader }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    Navigate("/");
   };
 
   return (
@@ -97,13 +102,7 @@ const Header = ({ titleHeader }) => {
                     <p>Dashboard</p>
                   </div>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    localStorage.removeItem("accessToken");
-                    localStorage.removeItem("idUser");
-                    Navigate("/");
-                  }}
-                >
+                <MenuItem onClick={logout}>
                   <div className="items-menu-header">
                     <ExitToAppIcon style={{ marginRight: "8px" }} />
                     <p>Logout</p>

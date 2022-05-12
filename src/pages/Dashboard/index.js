@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Header from "../../components/Header";
 import CardLigDesl from "../../components/CardLigDesl";
 import CardTimeExecution from "../../components/CardTimeExecution";
@@ -9,52 +9,78 @@ import ChartTemperature from "../../components/ChartTemperature";
 import ChartArea from "../../components/ChartArea";
 import "./style.css";
 import "./responsive.css";
+import { useNavigate } from "react-router-dom";
+
+import Service from "../../services";
+const srv = new Service();
 
 const Dashboard = () => {
-	return (
-		<>
-			<Header titleHeader="Dashboard" />
+  const navigate = useNavigate();
 
-			<main>
-				<section className="container-cards-dash">
-					<div className="box-card status">
-						<CardLigDesl />
-					</div>
+  const [user, setUser] = useState(null);
 
-					<div className="box-card execution">
-						<CardTimeExecution />
-					</div>
+  const verifyUser = useCallback(async () => {
+    const { user: username, token } = localStorage;
 
-					<div className="box-card alarme">
-						<Alarme />
-					</div>
+    if (!token) navigate("/error");
+    else {
+      const valid = srv.validToken(token, () => {
+        localStorage.clear();
+        navigate("/error");
+      });
 
-					<div className="box-card clock">
-						<Clock />
-					</div>
+      if (valid) setUser(username);
+    }
+  }, [navigate]);
 
-					<div className="box-chart feedChart-cards">
-						<ChartFeedRate />
-					</div>
-				</section>
+  useEffect(() => {
+    verifyUser();
+  }, [verifyUser]);
 
-				<section className="container-charts-dash">
-					<div className="box-chart feedChart">
-						<ChartFeedRate />
-					</div>
+  return (
+    <>
+      <Header titleHeader="Dashboard" userName={user} />
 
-					<div className="two-charts">
-						<div className="box-chart temperature">
-							<ChartTemperature />
-						</div>
+      <main>
+        <section className="container-cards-dash">
+          <div className="box-card status">
+            <CardLigDesl />
+          </div>
 
-						<div className="box-chart rotationMin">
-							<ChartArea />
-						</div>
-					</div>
-				</section>
-			</main>
-		</>
-	);
+          <div className="box-card execution">
+            <CardTimeExecution />
+          </div>
+
+          <div className="box-card alarme">
+            <Alarme />
+          </div>
+
+          <div className="box-card clock">
+            <Clock />
+          </div>
+
+          <div className="box-chart feedChart-cards">
+            <ChartFeedRate />
+          </div>
+        </section>
+
+        <section className="container-charts-dash">
+          <div className="box-chart feedChart">
+            <ChartFeedRate />
+          </div>
+
+          <div className="two-charts">
+            <div className="box-chart temperature">
+              <ChartTemperature />
+            </div>
+
+            <div className="box-chart rotationMin">
+              <ChartArea />
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
 };
 export default Dashboard;
