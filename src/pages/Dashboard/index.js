@@ -41,7 +41,7 @@ const Dashboard = () => {
     <>
       <Header titleHeader="Dashboard" userName={user} />
 
-      <main>
+      <article className="dashboard">
         <section className="container-cards-dash">
           <div className="box-card status">
             <CardLigDesl />
@@ -79,7 +79,7 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
-      </main>
+      </article>
     </>
   );
 };
