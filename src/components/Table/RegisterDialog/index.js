@@ -71,14 +71,14 @@ export default function RegisterDialog() {
 
               <div className="areaInput">
                 <label>CPF</label>
-                <input type="text" maxLength="14" onKeyPress={(evt) => {
+                <input type="text" maxLength="11" onKeyPress={(evt) => {
                   var key = (evt.which) ? evt.which : evt.keyCode
 
                   if (key > 31 && (key < 48 || key > 57)) {
                     evt.preventDefault();
                   }
                 }} onBlur={(evt) => {
-                  evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]+)/, "$1.$2.$3-$4")
+                  evt.target.value = evt.target.value.replace(/([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/, "$1.$2.$3-$4")
                   setCPF(evt.target.value)
                 }} />
               </div>
