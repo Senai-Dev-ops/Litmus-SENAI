@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
@@ -54,6 +54,14 @@ const Login = () => {
       setOpen(true);
     }
   };
+
+  useEffect(() => {
+    srv.validToken(localStorage.getItem("token"), () => {}).then(
+      (res) => {
+        if(res) navigate("/dashboard")
+      }
+    )
+  }, [])
 
   return (
     <main className="login">
