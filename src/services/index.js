@@ -23,17 +23,18 @@ export default class Service {
 
   async registerUser(requestingId, body, headers){
     const response = await api.post(`/user-create/${requestingId}`, body, { headers: headers });
-    return response;
+    return response.data;
   }
 
   async editUser(requestingId, targetId, body, headers) {
     const response = await api.patch(`/user-update/${requestingId}/${targetId}`, body, { headers: headers });
-    return response;
+    
+    return response.data;
   }
 
   async deleteUser(requestingId, targetId, headers){
     const response = await api.delete(`/delete-user/${requestingId}/${targetId}`, { headers: headers })
-    return response;
+    return response.data;
   }
 
   async validToken(token, callback) {

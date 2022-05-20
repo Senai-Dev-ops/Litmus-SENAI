@@ -10,6 +10,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
 import Service from "../../../services";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const srv = new Service();
 
@@ -18,7 +19,6 @@ export default function EditDialog({ open, onClose, userInfo }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCPF] = useState("");
-  const [admin, setAdmin] = useState(true);
   const [dataNasc, setDataNasc] = useState("");
 
   const handleClose = () => {
@@ -29,16 +29,17 @@ export default function EditDialog({ open, onClose, userInfo }) {
     const requestingId = localStorage.getItem("idUser");
     const headers = { "accessToken": localStorage.getItem("token") }
     
-    const response = srv.editUser(requestingId, userInfo.idUsuario, {
+    await srv.editUser(requestingId, userInfo.idUsuario, {
       nome: (name === "") ? userInfo.nome : name,
       email: (email === "") ? userInfo.email : email,
-      CPF: (cpf === "") ? userInfo.CPF : cpf,
+      CPF: (cpf === "") ? userInfo.cpf : cpf,
       ADM: (userInfo.accountType === "Administrador") ? true : false,
       DATANASC: (dataNasc === "") ? userInfo.DATANASC : dataNasc
-    }, headers)
-
-    console.log(userInfo)
-    console.log(response)
+    }, headers).then((res) => {
+      toast.info(res.message)
+    }).catch((err) => {
+      toast.error(err.response.data.error)
+    })
   }
 
   return (
@@ -99,7 +100,6 @@ export default function EditDialog({ open, onClose, userInfo }) {
                 <label>Tipo de conta</label>
                 <select defaultValue={userInfo.accountType} onChange={(evt) => {
                     userInfo.accountType = evt.target.value
-                    setAdmin((evt.target.value == "Comum") ? false : true)
                   }}>
                   <option>Administrador</option>
                   <option>Comum</option>

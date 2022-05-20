@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import Service from "./services";
 const srv = new Service();
@@ -65,6 +67,7 @@ const Router = () => {
           }
         />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 };
