@@ -22,11 +22,11 @@ const Dashboard = () => {
   const verifyUser = useCallback(async () => {
     const { user: username, token } = localStorage;
 
-    if (!token) navigate("/error");
+    if (!token) navigate("/");
     else {
       const valid = srv.validToken(token, () => {
         localStorage.clear();
-        navigate("/error");
+        navigate("/");
       });
 
       if (valid) setUser(username);
