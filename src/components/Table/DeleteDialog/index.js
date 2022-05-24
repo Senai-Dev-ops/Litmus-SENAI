@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./style.css";
+import { toast } from "react-toastify";
 import Service from "../../../services";
 
 const srv = new Service();
@@ -23,6 +24,13 @@ export default function DeleteDialog({ open, onClose, userInfo }) {
         const headers = { "accessToken": localStorage.getItem("token") }
 
         const response = await srv.deleteUser(requestingId, userInfo.idUsuario, headers);
+
+        toast.info(response.message, { autoClose: 1500 })
+
+        setInterval(() => { 
+            window.location.reload()
+         }, 2000);
+         
         console.log(response);
     }
 

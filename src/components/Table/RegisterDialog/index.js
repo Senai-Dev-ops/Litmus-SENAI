@@ -9,6 +9,7 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
 import "./style.css";
+import { toast } from "react-toastify";
 import Service from "../../../services";
 
 const srv = new Service();
@@ -29,20 +30,26 @@ export default function RegisterDialog() {
     setOpen(false);
   };
 
-  async function registerUser(){
+  async function registerUser() {
     const requestingId = localStorage.getItem("idUser");
-    const headers = {"accessToken": localStorage.getItem("token")}
+    const headers = { "accessToken": localStorage.getItem("token") }
 
-    const response = await srv.registerUser(requestingId, {
+    await srv.registerUser(requestingId, {
       nome: name,
       email: email,
       senha: "senai@115",
       CPF: cpf,
       ADM: admin,
       DATANASC: dataNasc
-    }, headers)
+    }, headers).then((res) => {
+      toast.info(res.message, { autoClose: 1500 })
 
-    console.log(response);
+      setInterval(() => {
+        window.location.reload()
+      }, 2000);
+    }).catch((err) => {
+      toast.error(err.response.data.error)
+    })
   }
 
   return (
@@ -66,7 +73,7 @@ export default function RegisterDialog() {
                 <label>Nome</label>
                 <input type="text" onChange={(evt) => {
                   setName(evt.target.value)
-                }}/>
+                }} />
               </div>
 
               <div className="areaInput">
@@ -87,7 +94,7 @@ export default function RegisterDialog() {
                 <label>Data de nascimento</label>
                 <input type="date" onChange={(evt) => {
                   setDataNasc(evt.target.value)
-                }}/>
+                }} />
               </div>
             </div>
 
@@ -96,14 +103,14 @@ export default function RegisterDialog() {
                 <label>Email</label>
                 <input type="email" onChange={(evt) => {
                   setEmail(evt.target.value)
-                }}/>
+                }} />
               </div>
 
               <div className="areaInput">
                 <label>Tipo de conta</label>
                 <select onChange={(evt) => {
-                    setAdmin((evt.target.value == "Comum") ? false : true)
-                  }}>
+                  setAdmin((evt.target.value === "Comum") ? false : true)
+                }}>
                   <option>Administrador</option>
                   <option>Comum</option>
                 </select>

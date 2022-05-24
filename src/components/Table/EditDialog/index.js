@@ -36,10 +36,15 @@ export default function EditDialog({ open, onClose, userInfo }) {
       ADM: (userInfo.accountType === "Administrador") ? true : false,
       DATANASC: (dataNasc === "") ? userInfo.DATANASC : dataNasc
     }, headers).then((res) => {
-      toast.info(res.message)
+      toast.info(res.message, {autoClose: 1500})
+
+      setInterval(() => {
+        window.location.reload()
+      }, 2000)
     }).catch((err) => {
       toast.error(err.response.data.error)
     })
+    
   }
 
   return (

@@ -16,7 +16,7 @@ const PrivateRouteAdmin = ({ children }) => {
   const auth = userAuth(localStorage.getItem("token"), () => {}).then(
     (res) => res
   );
-  const userAdm = localStorage.getItem("adm") == 0 ? false : true;
+  const userAdm = localStorage.getItem("adm") === 0 ? false : true;
 
   return auth ? (
     userAdm ? (children) : (
