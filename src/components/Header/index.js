@@ -18,7 +18,8 @@ const Header = ({ titleHeader, userName }) => {
   const username = userName || "James Ferreira";
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const userAdmin = localStorage.getItem("adm") == 1 ? true : false
+  // const userAdmin = localStorage.getItem("adm") == 1 ? true : false
+  const userAdmin = true
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,11 +80,7 @@ const Header = ({ titleHeader, userName }) => {
                       </div>
                     </MenuItem>
 
-                    <MenuItem
-                      onClick={() => {
-                        Navigate("/admin");
-                      }}
-                    >
+                    <MenuItem>
                       <div className="items-menu-header">
                         <PictureAsPdfIcon style={{ marginRight: 8 }} />
                         <PdfGenerator />
