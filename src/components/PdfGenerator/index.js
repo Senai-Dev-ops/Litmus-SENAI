@@ -1,68 +1,231 @@
 import React from "react";
+
 import "./style.css";
+
 import pdfMake from "pdfmake/build/pdfmake";
+
 import pdfFonts from "pdfmake/build/vfs_fonts";
+
 import LgSenai from "../../assets/images/senai.png";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-// playground requires you to assign document definition to a variable called dd
+
 
 let starts = 13;
+
 let execution = 15;
 
+let avance = 12;
+
+let temperature = 13;
+
+let rotation = 22;
+
+
+
 var docDefinition = {
-	content: [
-		{ image: LgSenai, alignment: "center" },
+
+	pageSize: "A4",
+
+	pageMargins: [40, 60, 40, 60],
+
+	pages: 2,
+
+
+
+	footer: [
+
 		{
-			text: "Relatório máquina - CNC SR-20J Type C ",
+
+			text: "Mês referente: Jun/2022",
+
+			alignment: "right",
+
+			margin: [0, 0, 16, 0],
+
+			style: "footer",
+
+			color: "#000",
+
+		},
+
+
+
+		{
+
+			text: "Escola Senai Suíço-Brasileira Paulo Ernesto Tolle - 2022",
+
 			alignment: "center",
-			margin: [5, 26],
-			style: "headerTitle",
+
+			style: "footer",
+
+			margin: [0, 12, 0, 0],
+
 		},
 
-		{
-			columns: [
-				{
-					text: `Quantidade de starts: ${starts}`,
-					style: "infosMachine",
-				},
-
-				{
-					text: `Tempo em execução: ${execution}s`,
-					style: "infosMachine",
-				},
-			],
-
-			alignment: "center",
-			columnGap: 10,
-		},
-
-		{
-			columns: ["Left part", { text: "Right part", alignment: "right" }],
-		},
 	],
 
+
+
+	content: [
+
+		{
+
+			image: LgSenai,
+
+			alignment: "center",
+
+			margin: [0, 10],
+
+		},
+
+
+
+		{
+
+			text: "Relatório máquina - CNC SR-20J Type C",
+
+			alignment: "center",
+
+			margin: [5, 26],
+
+			style: "headerTitle",
+
+		},
+
+
+
+		{
+
+			text: `Quantidade de starts: ${starts}`,
+
+			style: "infosMachine",
+
+			alignment: "left",
+
+			margin: [60, 26],
+
+		},
+
+
+
+		{
+
+			text: `Tempo em execução: ${execution}s`,
+
+			style: "infosMachine",
+
+			alignment: "left",
+
+			margin: [60, 26],
+
+		},
+
+
+
+		{
+
+			text: `Velocidade de avanço médio: ${avance}`,
+
+			margin: [60, 26],
+
+			style: "infosMachine",
+
+			alignment: "left",
+
+		},
+
+
+
+		{
+
+			text: `Temperatura média: ${temperature}`,
+
+			margin: [60, 26],
+
+			style: "infosMachine",
+
+			alignment: "left",
+
+		},
+
+
+
+		{
+
+			text: `Rotação por minuto média: ${rotation}`,
+
+			margin: [60, 26],
+
+			style: "infosMachine",
+
+			alignment: "left",
+
+		},
+
+	],
+
+
+
 	styles: {
+
 		headerTitle: {
-			fontSize: 16,
+
+			fontSize: 20,
+
 			bold: true,
+
 		},
+
 		infosMachine: {
-			bold: true,
+
+			fontSize: 14,
+
+			bold: false,
+
+			italics: true,
+
 		},
+
+		footer: {
+
+			color: "#535659",
+
+			fontSize: 12,
+
+		},
+
 	},
+
 };
+
+
 
 const PdfGenerator = () => {
+
 	const create = () => {
+
 		pdfMake.createPdf(docDefinition).open({}, window.open("", "_blank"));
+
 	};
 
+
+
 	return (
+
 		<button className="btn-pdfGenerator" type="button" onClick={create}>
+
 			Relatório em PDF
+
 		</button>
+
 	);
+
 };
 
+
+
 export default PdfGenerator;
+
+
