@@ -350,7 +350,7 @@ export default function RegisterDialog() {
       </Dialog>
 
       <Button size="medium" id="addUserButton" onClick={handleClickOpen}>
-        Add User
+        Adicionar
       </Button>
     </div>
   );
