@@ -13,7 +13,6 @@ let rotation = 22;
 
 const timeElapsed = Date.now();
 const today = new Date(timeElapsed);
-console.log(today.toLocaleDateString())
 
 var docDefinition = {
   pageSize: "A4",
@@ -53,8 +52,8 @@ var docDefinition = {
 
     {
       text: `Quantidade de starts: ${starts}`,
-      margin: [60, 26], 
-	  style: "infosMachine",
+      margin: [60, 26],
+      style: "infosMachine",
       alignment: "left",
     },
 

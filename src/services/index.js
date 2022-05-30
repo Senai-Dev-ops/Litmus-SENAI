@@ -5,8 +5,7 @@ const api = axios.create({
 });
 
 export default class Service {
-
-  getBaseURL(){
+  getBaseURL() {
     return api.getUri();
   }
 
@@ -21,19 +20,28 @@ export default class Service {
     return response;
   }
 
-  async registerUser(requestingId, body, headers){
-    const response = await api.post(`/user-create/${requestingId}`, body, { headers: headers });
+  async registerUser(requestingId, body, headers) {
+    const response = await api.post(`/user-create/${requestingId}`, body, {
+      headers: headers,
+    });
     return response.data;
   }
 
   async editUser(requestingId, targetId, body, headers) {
-    const response = await api.patch(`/user-update/${requestingId}/${targetId}`, body, { headers: headers });
-    
+    const response = await api.patch(
+      `/user-update/${requestingId}/${targetId}`,
+      body,
+      { headers: headers }
+    );
+
     return response.data;
   }
 
-  async deleteUser(requestingId, targetId, headers){
-    const response = await api.delete(`/delete-user/${requestingId}/${targetId}`, { headers: headers })
+  async deleteUser(requestingId, targetId, headers) {
+    const response = await api.delete(
+      `/delete-user/${requestingId}/${targetId}`,
+      { headers: headers }
+    );
     return response.data;
   }
 
@@ -51,5 +59,15 @@ export default class Service {
     } else {
       return true;
     }
+  }
+
+  async statusMachine(start) {
+    const { data } = await api.post(`/status/${start}`);
+    return data.message;
+  }
+
+  async machineList() {
+    const { data } = await api.get("/maquina-list");
+    console.log(data);
   }
 }
