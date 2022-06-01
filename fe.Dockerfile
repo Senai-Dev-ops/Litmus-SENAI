@@ -16,4 +16,4 @@ RUN apt install nodejs nginx -y
 RUN mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.BACKUP
 COPY --from=build-stage /usr/src/app/nginx.conf /etc/nginx/sites-available/default
 COPY --from=build-stage /usr/src/app/build /var/www/html/
-EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
