@@ -92,7 +92,7 @@ export default function RegisterDialog() {
   function validarDataNasc(evtDate) {
     let date = new Date(evtDate);
 
-    if (date == "Invalid Date") {
+    if (date === "Invalid Date") {
       document.querySelector("#date-label").classList.remove("valid");
       document.querySelector("#date-label").classList.add("invalid");
 

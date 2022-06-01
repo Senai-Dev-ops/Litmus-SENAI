@@ -12,6 +12,7 @@ import "./responsive.css";
 import { useNavigate } from "react-router-dom";
 
 import Service from "../../services";
+import axios from "axios";
 const srv = new Service();
 
 const Dashboard = () => {

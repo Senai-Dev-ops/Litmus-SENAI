@@ -68,6 +68,6 @@ export default class Service {
 
   async machineList() {
     const { data } = await api.get("/maquina-list");
-    console.log(data);
+    return data.infos;
   }
 }

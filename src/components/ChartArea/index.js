@@ -1,33 +1,35 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 export default function ChartArea() {
+  const [data, setData] = useState([]);
+  const avance = [];
+  const datahora = [];
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/maquina-list`)
+      .then(({ data }) => setData(data.infos));
+  }, []);
+
+  function getRotation() {
+    for (let i in data) {
+      avance.push(data[i].avanco);
+      datahora.push(data[i].datahora);
+    }
+  }
+
+  getRotation();
+
   const mockData = {
     labels: {
-      categories: [
-        "14:46",
-        "14:47",
-        "14:48",
-        "14:49",
-        "14:50",
-        "14:51",
-        "14:52",
-        "14:53",
-        "14:54",
-        "14:55",
-        "14:56",
-        "14:57",
-        "14:58",
-        "14:59",
-        "15:00",
-      ],
+      categories: datahora,
     },
     series: [
       {
         name: "RPM",
-        data: [
-          100000, 99580, 97300, 91911, 91731, 99489, 85306, 96820, 100000,
-          98764, 83854, 94392, 86197, 94391, 93871,
-        ],
+        data: avance,
       },
     ],
   };
