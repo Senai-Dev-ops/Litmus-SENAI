@@ -12,76 +12,81 @@ import "./responsive.css";
 import { useNavigate } from "react-router-dom";
 
 import Service from "../../services";
-import axios from "axios";
 const srv = new Service();
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
+	const [user, setUser] = useState(null);
 
-  const verifyUser = useCallback(async () => {
-    const { user: username, token } = localStorage;
+	const verifyUser = useCallback(async () => {
+		const { user: username, token } = localStorage;
 
-    if (!token) navigate("/");
-    else {
-      const valid = srv.validToken(token, () => {
-        localStorage.clear();
-        navigate("/");
-      });
+		if (!token) navigate("/");
+		else {
+			const valid = srv.validToken(token, () => {
+				localStorage.clear();
+				navigate("/");
+			});
 
-      if (valid) setUser(username);
-    }
-  }, [navigate]);
+			if (valid) setUser(username);
+		}
+	}, [navigate]);
 
-  useEffect(() => {
-    verifyUser();
-  }, [verifyUser]);
+	useEffect(() => {
+		verifyUser();
+	}, [verifyUser]);
 
-  return (
-    <>
-      <Header titleHeader="Dashboard" userName={user} />
+	const [statusMachine, setStatusMachine] = useState("");
 
-      <article className="dashboard">
-        <section className="container-cards-dash">
-          <div className="box-card status">
-            <CardLigDesl />
-          </div>
+	const getStatusMachine = (status) => {
+		setStatusMachine(status);
+	};
 
-          <div className="box-card execution">
-            <CardTimeExecution />
-          </div>
+	return (
+		<>
+			<Header titleHeader="Dashboard" userName={user} />
 
-          <div className="box-card alarme">
-            <Alarme />
-          </div>
+			<article className="dashboard">
+				<section className="container-cards-dash">
+					<div className="box-card status">
+						<CardLigDesl statusMachine={getStatusMachine} />
+					</div>
 
-          <div className="box-card clock">
-            <Clock />
-          </div>
+					<div className="box-card execution">
+						<CardTimeExecution start={statusMachine} />
+					</div>
 
-          <div className="box-chart feedChart-cards">
-            <ChartFeedRate />
-          </div>
-        </section>
+					<div className="box-card alarme">
+						<Alarme />
+					</div>
 
-        <section className="container-charts-dash">
-          <div className="box-chart feedChart">
-            <ChartFeedRate />
-          </div>
+					<div className="box-card clock">
+						<Clock />
+					</div>
 
-          <div className="two-charts">
-            <div className="box-chart temperature">
-              <ChartTemperature />
-            </div>
+					<div className="box-chart feedChart-cards">
+						<ChartFeedRate />
+					</div>
+				</section>
 
-            <div className="box-chart rotationMin">
-              <ChartArea />
-            </div>
-          </div>
-        </section>
-      </article>
-    </>
-  );
+				<section className="container-charts-dash">
+					<div className="box-chart feedChart">
+						<ChartFeedRate />
+					</div>
+
+					<div className="two-charts">
+						<div className="box-chart temperature">
+							<ChartTemperature />
+						</div>
+
+						<div className="box-chart rotationMin">
+							<ChartArea />
+						</div>
+					</div>
+				</section>
+			</article>
+		</>
+	);
 };
 export default Dashboard;
