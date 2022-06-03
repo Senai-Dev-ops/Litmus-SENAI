@@ -1,27 +1,29 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+
 import Service from "../../services";
+
+const srv = new Service();
 
 export default function ChartTemperature() {
   const [data, setData] = useState([]);
-  const temperature = [];
-  const datahora = [];
+  const [datahora, setDatahora] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/maquina-list`)
-      .then(({ data }) => setData(data.infos));
-  }, []);
+  async function getTemperature() {
+    await srv.machineList().then((res) => {
 
-  function getRotation() {
-    for (let i in data) {
-      temperature.push(data[i].temperatura);
-      datahora.push(data[i].datahora);
-    }
+      for(const i in res.infos){
+        setData((arr) => [...arr, res.infos[i].temperatura]);
+
+        const date = new Date(res.infos[i].datahora);
+        setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
+      }
+    })
   }
-
-  getRotation();
+  
+  useEffect(() => {
+    getTemperature()
+  }, []);
 
   const mockData = {
     labels: {
@@ -30,7 +32,7 @@ export default function ChartTemperature() {
     series: [
       {
         name: "°C",
-        data: temperature,
+        data: data,
       },
     ],
   };
@@ -44,7 +46,7 @@ export default function ChartTemperature() {
     plotOptions: {
       bar: {
         borderRadius: 4,
-        horizontal: true,
+        horizontal: false,
       },
     },
     fill: {

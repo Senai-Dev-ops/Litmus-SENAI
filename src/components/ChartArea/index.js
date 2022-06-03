@@ -1,26 +1,28 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import Service from '../../services';
+
+const srv = new Service();
 
 export default function ChartArea() {
   const [data, setData] = useState([]);
-  const avance = [];
-  const datahora = [];
+  const [datahora, setDatahora] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/maquina-list`)
-      .then(({ data }) => setData(data.infos));
-  }, []);
+  async function getRotation() {
+    await srv.machineList().then((res) => {
 
-  function getRotation() {
-    for (let i in data) {
-      avance.push(data[i].avanco);
-      datahora.push(data[i].datahora);
-    }
+      for(const i in res.infos){
+        setData((arr) => [...arr, res.infos[i].rotacao]);
+
+        const date = new Date(res.infos[i].datahora);
+        setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
+      }
+    })
   }
-
-  getRotation();
+  
+  useEffect(() => {
+    getRotation()
+  }, []);
 
   const mockData = {
     labels: {
@@ -29,7 +31,7 @@ export default function ChartArea() {
     series: [
       {
         name: "RPM",
-        data: avance,
+        data: data,
       },
     ],
   };

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import Service from "../../services";
@@ -7,45 +6,26 @@ import "./style.css";
 const srv = new Service();
 
 export default function ChartFeedRate() {
-  //   const [data, setData] = useState([
-  //     {
-  //       rotation: 0,
-  //       datahora: "00/00/0000 00:00",
-  //     },
-  //   ]);
+  const [data, setData] = useState([]);
+  const [datahora, setDatahora] = useState([]);
 
-  //   const loadData = () => {
-  //     const response = axios
-  //       .get(`http://localhost:4000/maquina-list`)
-  //       .then(({ data }) => data);
 
-  //     return response;
-  //   };
+  async function getFeedRate() {
+    await srv.machineList().then((res) => {
 
-  //   useEffect(() => {
-  //     loadData();
-  //   }, []);
+      for(const i in res.infos){
+        setData((arr) => [...arr, res.infos[i].avanco]);
 
-  //   console.log(loadData());
-
-  const [rotationList, setRotationList] = useState([]);
-  const rotation = [];
-  const datahora = [];
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/maquina-list`)
-      .then(({ data }) => setRotationList(data.infos));
-  }, []);
-
-  function getRotation() {
-    for (let i in rotationList) {
-      rotation.push(rotationList[i].rotacao);
-      datahora.push(rotationList[i].datahora);
-    }
+        const date = new Date(res.infos[i].datahora);
+        setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
+      }
+    })
   }
-
-  getRotation();
+  
+  useEffect(() => {
+    getFeedRate()
+  }, []);
+  
 
   const mockData = {
     labels: {
@@ -54,7 +34,7 @@ export default function ChartFeedRate() {
     series: [
       {
         name: "mm / min",
-        data: rotation,
+        data: data,
       },
     ],
   };
