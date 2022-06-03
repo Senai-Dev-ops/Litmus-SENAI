@@ -14,85 +14,89 @@ import { IconButton } from "@mui/material";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 
-export default function MenuMobile({ pageName, user, typeUser }) {
-	const navigate = useNavigate();
-	const verifyTypeUser = () => {
-		return typeUser ? "Administrador" : "Usuário Comum";
-	};
+export default function MenuMobile({ pageName, user, typeUser, logoutFunc }) {
+  const navigate = useNavigate();
 
-	const [state, setState] = React.useState({
-		right: false,
-	});
+  const [state, setState] = React.useState({
+    right: false,
+  });
 
-	const toggleDrawer = (anchor, open) => (event) => {
-		if (
-			event &&
-			event.type === "keydown" &&
-			(event.key === "Tab" || event.key === "Shift")
-		) {
-			return;
-		}
+  const toggleDrawer = (anchor, open) => (event) => {
+	  console.log(typeUser)
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
 
-		setState({ ...state, [anchor]: open });
-	};
+    setState({ ...state, [anchor]: open });
+  };
 
-	return (
-		<React.Fragment>
-			<IconButton onClick={toggleDrawer("right", true)}>
-				<MenuIcon sx={{ fontSize: 35 }} />
-			</IconButton>
-			<SwipeableDrawer
-				anchor={"right"}
-				open={state["right"]}
-				onClose={toggleDrawer("right", false)}
-				onOpen={toggleDrawer("right", true)}
-			>
-				<Box
-					sx={{ width: 270 }}
-					onClick={toggleDrawer("right", false)}
-					onKeyDown={toggleDrawer("right", false)}
-				>
-					<List>
-						<ListItem>
-							<h1 className="pageName-menu-mobile">{pageName}</h1>
-						</ListItem>
-						<ListItem>
-							<div className="item-menu-mobile-user">
-								<h4 className="userName-menu-mobile">{user}</h4>
-								<span className="typeuUser-menu-mobile">
-									{verifyTypeUser()}
-								</span>
-							</div>
-						</ListItem>
-					</List>
-					<Divider />
-					<List>
-						<ListItem button onClick={() => navigate("/admin")}>
-							<ListItemIcon>
-								<SettingsIcon />
-							</ListItemIcon>
-							<ListItemText primary="Gerenciar Usuários" />
-						</ListItem>
-						<ListItem button onClick={() => {
-							localStorage.removeItem("accessToken");
-							localStorage.removeItem("idUser");
-							navigate("/dashboard")
-						}}>
-							<ListItemIcon>
-								<InsightsIcon />
-							</ListItemIcon>
-							<ListItemText primary="Dashboard" />
-						</ListItem>
-						<ListItem button onClick={() => navigate("/")}>
-							<ListItemIcon>
-								<ExitToAppIcon />
-							</ListItemIcon>
-							<ListItemText primary="Sair" />
-						</ListItem>
-					</List>
-					<Divider />
-				</Box>
-			</SwipeableDrawer>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <IconButton onClick={toggleDrawer("right", true)}>
+        <MenuIcon sx={{ fontSize: 35 }} />
+      </IconButton>
+      <SwipeableDrawer
+        anchor={"right"}
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
+        onOpen={toggleDrawer("right", true)}
+      >
+        <Box
+          sx={{ width: 270 }}
+          onClick={toggleDrawer("right", false)}
+          onKeyDown={toggleDrawer("right", false)}
+        >
+          <List>
+            <ListItem>
+              <h1 className="pageName-menu-mobile">{pageName}</h1>
+            </ListItem>
+            <ListItem>
+              <div className="item-menu-mobile-user">
+                <h4 className="userName-menu-mobile">{user}</h4>
+                <span className="typeuUser-menu-mobile">
+                  {typeUser ? "Administrador" : "Usuário Comum"}
+                </span>
+              </div>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            {typeUser && (
+              <ListItem button onClick={() => navigate("/admin")}>
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Gerenciar Usuários" />
+              </ListItem>
+            )}
+
+            <ListItem
+              button
+              onClick={() => {
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("idUser");
+                navigate("/dashboard");
+              }}
+            >
+              <ListItemIcon>
+                <InsightsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+            <ListItem button onClick={() => logoutFunc()}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sair" />
+            </ListItem>
+          </List>
+          <Divider />
+        </Box>
+      </SwipeableDrawer>
+    </React.Fragment>
+  );
 }

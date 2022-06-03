@@ -18,8 +18,7 @@ const Header = ({ titleHeader, userName }) => {
   const username = userName || "James Ferreira";
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const userAdmin = localStorage.getItem("adm") == 1 ? true : false
-  const userAdmin = true
+  const userAdmin = localStorage.getItem("adm") == 1 ? true : false
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -114,6 +113,7 @@ const Header = ({ titleHeader, userName }) => {
               pageName={titleHeader}
               user={username}
               typeUser={userAdmin}
+              logoutFunc={logout}
             />
           </div>
         </div>
