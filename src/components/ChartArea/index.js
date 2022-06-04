@@ -11,10 +11,10 @@ export default function ChartArea() {
   async function getRotation() {
     await srv.machineList().then((res) => {
 
-      for(const i in res.infos){
-        setData((arr) => [...arr, res.infos[i].rotacao]);
+      for(const i in res.infos.rows){
+        setData((arr) => [...arr, res.infos.rows[i].rotacao]);
 
-        const date = new Date(res.infos[i].datahora);
+        const date = new Date(res.infos.rows[i].datahora);
         setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
       }
     })

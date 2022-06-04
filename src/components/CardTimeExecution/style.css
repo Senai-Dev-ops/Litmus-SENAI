@@ -11,12 +11,11 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	gap: 2rem;
+	gap: 2.4rem;
 }
 
 /*Style titulo do card*/
 .content-execution {
-	font-family: "Nunito", sans-serif;
 	font-style: normal;
 	font-weight: 600;
 	font-size: 20px;

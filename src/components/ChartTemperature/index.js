@@ -12,10 +12,10 @@ export default function ChartTemperature() {
   async function getTemperature() {
     await srv.machineList().then((res) => {
 
-      for(const i in res.infos){
-        setData((arr) => [...arr, res.infos[i].temperatura]);
+      for(const i in res.infos.rows){
+        setData((arr) => [...arr, res.infos.rows[i].temperatura]);
 
-        const date = new Date(res.infos[i].datahora);
+        const date = new Date(res.infos.rows[i].datahora);
         setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
       }
     })
