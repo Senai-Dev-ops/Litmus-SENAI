@@ -4,7 +4,7 @@ import "./style.css";
 
 const srv = new Service();
 
-const CardLigDesl = ({ statusMachine }) => {
+const CardLigDesl = ({ statusMachine, stopMachine }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	const handleCheckbox = () => {
@@ -20,6 +20,12 @@ const CardLigDesl = ({ statusMachine }) => {
 		statusMachine(isChecked);
 	}, [isChecked]);
 
+	useEffect(() => {
+		if (stopMachine) {
+			setIsChecked(false);
+		}
+	}, [stopMachine]);
+
 	return (
 		<div className="container-lig-off">
 			<h3 className="content-lig-off">Desligado / Ligado</h3>
@@ -28,6 +34,7 @@ const CardLigDesl = ({ statusMachine }) => {
 				<label className="switch-lig-off">
 					<input
 						type="checkbox"
+						disabled={stopMachine}
 						checked={isChecked}
 						onChange={handleCheckbox}
 					/>

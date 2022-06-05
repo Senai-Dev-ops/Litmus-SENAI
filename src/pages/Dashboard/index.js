@@ -38,9 +38,13 @@ const Dashboard = () => {
 	}, [verifyUser]);
 
 	const [statusMachine, setStatusMachine] = useState("");
-
 	const getStatusMachine = (status) => {
 		setStatusMachine(status);
+	};
+
+	const [alarmStatus, setAlarmStatus] = useState("");
+	const getAlarmStatus = (status) => {
+		setAlarmStatus(status);
 	};
 
 	return (
@@ -50,7 +54,10 @@ const Dashboard = () => {
 			<article className="dashboard">
 				<section className="container-cards-dash">
 					<div className="box-card status">
-						<CardLigDesl statusMachine={getStatusMachine} />
+						<CardLigDesl
+							statusMachine={getStatusMachine}
+							stopMachine={alarmStatus}
+						/>
 					</div>
 
 					<div className="box-card execution">
@@ -58,7 +65,7 @@ const Dashboard = () => {
 					</div>
 
 					<div className="box-card alarme">
-						<Alarme />
+						<Alarme alarmStatus={getAlarmStatus} />
 					</div>
 
 					<div className="box-card clock">
