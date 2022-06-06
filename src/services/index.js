@@ -72,4 +72,10 @@ export default class Service {
     
     return response.data;
   }
+
+  async lastInfo() {
+    const response = await api.get("/final-info");
+
+    return response.data;
+  }
 }

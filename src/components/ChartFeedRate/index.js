@@ -5,7 +5,7 @@ import "./style.css";
 
 const srv = new Service();
 
-export default function ChartFeedRate() {
+export default function ChartFeedRate({ statusMachine }) {
   const [data, setData] = useState([]);
   const [datahora, setDatahora] = useState([]);
 
@@ -13,7 +13,7 @@ export default function ChartFeedRate() {
   async function getFeedRate() {
     await srv.machineList().then((res) => {
 
-      for(const i in res.infos.rows){
+      for (const i in res.infos.rows) {
         setData((arr) => [...arr, res.infos.rows[i].avanco]);
 
         const date = new Date(res.infos.rows[i].datahora);
@@ -21,11 +21,22 @@ export default function ChartFeedRate() {
       }
     })
   }
-  
+
+  async function getLastFeedRate() {
+    await srv.lastInfo().then((res) => {
+      if(statusMachine) {
+        setData((arr) => [...arr, res.fItem.avanco])
+      }
+    }).finally(() => {
+      setInterval(() => { getLastFeedRate() }, 20500)
+    })
+  }
+
   useEffect(() => {
     getFeedRate()
   }, []);
-  
+
+  // setInterval(getLastFeedRate(), 20500)
 
   const mockData = {
     labels: {

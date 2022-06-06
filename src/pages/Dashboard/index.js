@@ -79,7 +79,7 @@ const Dashboard = () => {
 
 				<section className="container-charts-dash">
 					<div className="box-chart feedChart">
-						<ChartFeedRate />
+						<ChartFeedRate statusMachine={statusMachine}/>
 					</div>
 
 					<div className="two-charts">
