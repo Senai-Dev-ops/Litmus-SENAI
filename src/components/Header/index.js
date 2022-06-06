@@ -18,7 +18,7 @@ const Header = ({ titleHeader, userName }) => {
   const username = userName || "James Ferreira";
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const userAdmin = localStorage.getItem("adm") == 1 ? true : false
+  const userAdmin = localStorage.getItem("adm") == 1 ? true : false;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -101,7 +101,7 @@ const Header = ({ titleHeader, userName }) => {
                 <MenuItem onClick={logout}>
                   <div className="items-menu-header">
                     <ExitToAppIcon style={{ marginRight: "8px" }} />
-                    <p>Logout</p>
+                    <p>Sair</p>
                   </div>
                 </MenuItem>
               </Menu>

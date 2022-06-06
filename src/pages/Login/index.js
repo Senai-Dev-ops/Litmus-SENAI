@@ -38,15 +38,23 @@ const Login = () => {
         email: email.trim(),
         senha: password.trim(),
       };
-
       const response = await srv.login(body);
 
-      localStorage.setItem("adm", response.ADM);
-      localStorage.setItem("user", response.nome);
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("idUser", response.idUsuario)
+      if (!response.error) {
+        localStorage.setItem("adm", response.ADM);
+        localStorage.setItem("user", response.nome);
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("idUser", response.idUsuario);
 
-      navigate("/dashboard");
+        navigate("/dashboard");
+      } else {
+        setTitle("Não foi possível fazer o login");
+        setDescription(
+          "Verifique suas credências e tente novamente, por favor!"
+        );
+
+        setOpen(true);
+      }
     } catch (err) {
       setTitle("Não foi possível fazer o login");
       setDescription("Verifique suas credências e tente novamente, por favor!");
@@ -56,12 +64,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    srv.validToken(localStorage.getItem("token"), () => {}).then(
-      (res) => {
-        if(res) navigate("/dashboard")
-      }
-    )
-  }, [])
+    srv
+      .validToken(localStorage.getItem("token"), () => {})
+      .then((res) => {
+        if (res) navigate("/dashboard");
+      });
+  }, []);
 
   return (
     <main className="login">
