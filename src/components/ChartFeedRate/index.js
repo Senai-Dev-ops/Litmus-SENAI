@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+import ApexCharts from "apexcharts";
 import Service from "../../services";
 import "./style.css";
 
@@ -12,31 +13,48 @@ export default function ChartFeedRate({ statusMachine }) {
 
   async function getFeedRate() {
     await srv.machineList().then((res) => {
+      for (const i in res.infos) {
+        setData((arr) => [...arr, res.infos[i].avanco]);
 
-      for (const i in res.infos.rows) {
-        setData((arr) => [...arr, res.infos.rows[i].avanco]);
-
-        const date = new Date(res.infos.rows[i].datahora);
+        const date = new Date(res.infos[i].datahora);
         setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
       }
     })
   }
 
-  async function getLastFeedRate() {
-    await srv.lastInfo().then((res) => {
-      if(statusMachine) {
-        setData((arr) => [...arr, res.fItem.avanco])
-      }
-    }).finally(() => {
-      setInterval(() => { getLastFeedRate() }, 20500)
-    })
-  }
-
   useEffect(() => {
-    getFeedRate()
-  }, []);
+    if (data.length == 0) {
+      getFeedRate()
+    } else {
+      const interval = setInterval(async () => {
+        if(!statusMachine) return;
+        await srv.lastInfo()
+          .then((res) => {
+            let newData = [...data, res.fItem.avanco]
 
-  // setInterval(getLastFeedRate(), 20500)
+            let date = new Date(res.fItem.datahora);
+            let newDatahora = [...datahora, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`]
+
+            newData.shift()
+            newDatahora.shift()
+
+            ApexCharts.exec("avanco", "updateOptions", {
+              xaxis: {
+                categories: newDatahora
+              }
+            })
+
+            ApexCharts.exec("avanco", "updateSeries", [{
+              data: newData
+            }])
+
+            setData(newData)
+            setDatahora(newDatahora)
+          })
+      }, 21000);
+    }
+
+  }, [statusMachine]);
 
   const mockData = {
     labels: {
@@ -52,6 +70,7 @@ export default function ChartFeedRate({ statusMachine }) {
 
   const options = {
     chart: {
+      id: "avanco",
       toolbar: {
         show: true,
         tools: {

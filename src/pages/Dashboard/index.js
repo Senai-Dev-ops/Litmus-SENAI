@@ -84,11 +84,11 @@ const Dashboard = () => {
 
 					<div className="two-charts">
 						<div className="box-chart temperature">
-							<ChartTemperature />
+							<ChartTemperature statusMachine={statusMachine}/>
 						</div>
 
 						<div className="box-chart rotationMin">
-							<ChartArea />
+							<ChartArea statusMachine={statusMachine}/>
 						</div>
 					</div>
 				</section>

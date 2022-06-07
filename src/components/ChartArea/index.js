@@ -1,28 +1,58 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import ApexCharts from "apexcharts";
 import Service from '../../services';
 
 const srv = new Service();
 
-export default function ChartArea() {
+export default function ChartArea({ statusMachine }) {
   const [data, setData] = useState([]);
   const [datahora, setDatahora] = useState([]);
 
   async function getRotation() {
     await srv.machineList().then((res) => {
 
-      for(const i in res.infos.rows){
-        setData((arr) => [...arr, res.infos.rows[i].rotacao]);
+      for(const i in res.infos){
+        setData((arr) => [...arr, res.infos[i].rotacao]);
 
-        const date = new Date(res.infos.rows[i].datahora);
+        const date = new Date(res.infos[i].datahora);
         setDatahora((arr) => [...arr, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`])
       }
     })
   }
   
   useEffect(() => {
-    getRotation()
-  }, []);
+    if (data.length == 0) {
+      getRotation()
+    } else {
+      const interval = setInterval(async () => {
+        if(!statusMachine) return;
+        await srv.lastInfo()
+          .then((res) => {
+            let newData = [...data, res.fItem.rotacao]
+
+            let date = new Date(res.fItem.datahora);
+            let newDatahora = [...datahora, `${date.getHours()}:${date.getMinutes()}:${date.getMinutes()}`]
+
+            newData.shift()
+            newDatahora.shift()
+
+            ApexCharts.exec("rotacao", "updateOptions", {
+              xaxis: {
+                categories: newDatahora
+              }
+            })
+
+            ApexCharts.exec("rotacao", "updateSeries", [{
+              data: newData
+            }])
+
+            setData(newData)
+            setDatahora(newDatahora)
+          })
+      }, 21000);
+    }
+  }, [statusMachine]);
 
   const mockData = {
     labels: {
@@ -38,6 +68,7 @@ export default function ChartArea() {
 
   const options = {
     chart: {
+      id: "rotacao",
       toolbar: {
         show: true,
         tools: {
