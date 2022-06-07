@@ -18,7 +18,7 @@ const Header = ({ titleHeader, userName }) => {
 	const username = userName || "James Ferreira";
 	const Navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const userAdmin = localStorage.getItem("adm") === 1 ? true : false;
+	const userAdmin = localStorage.getItem("adm") === "1" ? true : false;
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);

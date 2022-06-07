@@ -78,4 +78,10 @@ export default class Service {
 
     return response.data;
   }
+
+  async pdfInfo() {
+    const response = await api.get("/pdf-info");
+
+    return response.data;
+  }
 }

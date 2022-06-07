@@ -8,46 +8,16 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const srv = new Service();
 
-let starts = 13;
-let execution = 15;
-// let avance = 12;
-// let temperature = 13;
-// let rotation = 22;
-
 const timeElapsed = Date.now();
 const today = new Date(timeElapsed);
 
 const PdfGenerator = () => {
-	const [rotationList, setRotationList] = useState([]);
-	const [velocityList, setVelocityList] = useState([]);
-	const [temperatureList, setTemperatureList] = useState([]);
+	const [rotation, setRotation] = useState(async () => { srv.pdfInfo().then((res) => res.rotation).then((ress) => setRotation(ress)) });
+	const [velocity, setVelocity] = useState(async () => { srv.pdfInfo().then((res) => res.velocity).then((ress) => setVelocity(ress)) });
+	const [temperature, setTemperature] = useState(async () => { srv.pdfInfo().then((res) => res.temperature).then((ress) => setTemperature(ress)) });
 
-	const [rotation, setRotation] = useState(0);
-	const [velocity, setVelocity] = useState(0);
-	const [temperature, setTemperature] = useState(0);
-
-	function getData() {
-		srv.machineList().then((res) => {
-			for (const i in res.infos) {
-				setRotationList((arr) => [...arr, res.infos[i].rotacao]);
-				setVelocityList((arr) => [...arr, res.infos[i].avanco]);
-				setTemperatureList((arr) => [...arr, res.infos[i].temperatura]);
-			}
-		});
-
-		var sumRotation = rotationList.reduce((sum, i) => sum + i);
-		var sumVelocity = velocityList.reduce((sum, i) => sum + i);
-		var sumTemperature = temperatureList.reduce((sum, i) => sum + i);
-
-		setRotation(Math.round(sumRotation / rotationList.length));
-		setVelocity(Math.round(sumVelocity / rotationList.length));
-		setTemperature(Math.round(sumTemperature / rotationList.length));
-	}
-
-	console.log(rotation, velocity, temperature);
 
 	const create = () => {
-		//    getData();
 		pdfMake.createPdf(docDefinition).open({}, window.open("", "_blank"));
 	};
 
@@ -85,20 +55,6 @@ const PdfGenerator = () => {
 				margin: [5, 26],
 				alignment: "center",
 				style: "headerTitle",
-			},
-
-			{
-				text: `Quantidade de starts: ${starts}`,
-				margin: [60, 26],
-				style: "infosMachine",
-				alignment: "left",
-			},
-
-			{
-				text: `Tempo em execução: ${execution}s`,
-				margin: [60, 26],
-				style: "infosMachine",
-				alignment: "left",
 			},
 
 			{
