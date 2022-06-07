@@ -47,7 +47,7 @@ const PdfGenerator = () => {
   }
 
   const create = () => {
-    getData();
+//    getData();
     pdfMake.createPdf(docDefinition).open({}, window.open("", "_blank"));
   };
 

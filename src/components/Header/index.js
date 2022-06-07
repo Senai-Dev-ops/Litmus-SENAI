@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import LgSenai from "../../assets/images/senai.png";
 import Dscr from "../../assets/images/descri.png";
 import Menu from "@material-ui/core/Menu";
@@ -13,6 +13,9 @@ import { IconButton } from "@mui/material";
 import "./style.css";
 import MenuMobile from "../MenuMobile";
 import PdfGenerator from "../PdfGenerator";
+import Service from "../../services";
+
+const srv = new Service();
 
 const Header = ({ titleHeader, userName }) => {
   const username = userName || "James Ferreira";
@@ -32,6 +35,60 @@ const Header = ({ titleHeader, userName }) => {
     localStorage.clear();
     Navigate("/");
   };
+
+
+  const [rotationList, setRotationList] = useState([]);
+  const [velocityList, setVelocityList] = useState([]);
+  const [temperatureList, setTemperatureList] = useState([]);
+
+  const [rotation, setRotation] = useState(0);
+  const [velocity, setVelocity] = useState(0);
+  const [temperature, setTemperature] = useState(0);
+
+
+  function getData() {
+    
+    srv.machineList().then((res) => {
+     console.log(res)
+     for (var i in res.infos) {
+        setRotationList((arr) => [...arr, res.infos[i].rotacao]);
+        setVelocityList((arr) => [...arr, res.infos[i].avanco]);
+        setTemperatureList((arr) => [...arr, res.infos[i].temperatura]);
+     }
+   //  var sumRotation = rotationList.reduce((sum, i) => sum + i);
+   //  var sumVelocity = velocityList.reduce((sum, i) => sum + i);
+   //  var sumTemperature = temperatureList.reduce((sum, i) => sum + i);
+
+   //  setRotation(Math.round(sumRotation / rotationList.length));
+   //  setVelocity(Math.round(sumVelocity / rotationList.length));
+   //  setTemperature(Math.round(sumTemperature / rotationList.length));
+
+   //  console.log(rotation, velocity, temperature);
+    });
+   
+   var sumRotation = rotationList.reduce((sum, i) => sum + i);
+   var sumVelocity = velocityList.reduce((sum, i) => sum + i);
+   var sumTemperature = temperatureList.reduce((sum, i) => sum + i);
+
+   setRotation(Math.round(sumRotation / rotationList.length));
+   setVelocity(Math.round(sumVelocity / rotationList.length));
+   setTemperature(Math.round(sumTemperature / rotationList.length));
+
+   console.log(rotation, velocity, temperature);
+  }
+
+  useEffect(() => {
+    srv.machineList().then((res) => {
+      console.log(res)
+      for (var i in res.infos) {
+         setRotationList((arr) => [...arr, res.infos[i].rotacao]);
+         setVelocityList((arr) => [...arr, res.infos[i].avanco]);
+         setTemperatureList((arr) => [...arr, res.infos[i].temperatura]);
+      }
+    });
+  }, []);
+
+	console.log(rotationList)
 
   return (
     <>
@@ -79,10 +136,11 @@ const Header = ({ titleHeader, userName }) => {
                       </div>
                     </MenuItem>
 
-                    <MenuItem>
+                    <MenuItem onClike={() => getData()}>
                       <div className="items-menu-header">
                         <PictureAsPdfIcon style={{ marginRight: 8 }} />
-                        <PdfGenerator />
+			{/*  <PdfGenerator /> */}
+
                       </div>
                     </MenuItem>
                   </div>
