@@ -73,22 +73,22 @@ const Dashboard = () => {
 					</div>
 
 					<div className="box-chart feedChart-cards">
-		{/*<ChartFeedRate />*/}
+						<ChartFeedRate />
 					</div>
 				</section>
 
 				<section className="container-charts-dash">
 					<div className="box-chart feedChart">
-		{/*<ChartFeedRate statusMachine={statusMachine}/> */}
+						<ChartFeedRate statusMachine={statusMachine} />
 					</div>
 
 					<div className="two-charts">
 						<div className="box-chart temperature">
-		{/*<ChartTemperature statusMachine={statusMachine}/>*/}
+							<ChartTemperature statusMachine={statusMachine} />
 						</div>
 
 						<div className="box-chart rotationMin">
-							<ChartArea statusMachine={statusMachine}/>
+							<ChartArea statusMachine={statusMachine} />
 						</div>
 					</div>
 				</section>
